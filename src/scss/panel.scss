@@ -1,0 +1,34 @@
+form {
+  button {
+    width: 14.285714285714286%;
+    height: 50px;
+
+    &.all {
+      background: black;
+    }
+
+    &.sn {
+      background: red;
+    }
+
+    &.ch {
+      background: yellow;
+    }
+
+    &.ct {
+      background: blue;
+    }
+
+    &.sl {
+      background: orange;
+    }
+
+    &.fb {
+      background: green;
+    }
+
+    &.cb {
+      background: pink;
+    }
+  }
+}
