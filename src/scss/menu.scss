@@ -9,8 +9,8 @@ header {
   }
 
   button {
-    width: em(44px);
-    height: em(44px);
+    width: em(55px);
+    height: em(55px);
     padding: 0;
     margin: 0;
     border: 0;
@@ -18,14 +18,19 @@ header {
 
   nav {
     position: fixed;
-    top: em(10px);
-    right: em(10px);
+    bottom: 0;
+    right: 0;
     z-index: 2002;
-    //    width: em(44px);
+    display: flex;
+    justify-content: flex-end;
+    background: chartreuse;
+    width: 100%;
+    padding: em(10px);
 
     &.menu {
       button {
         margin-right: em(10px);
+        background: #fff;
         transition: all 0.3s ease-in-out;
 
         &:last-child {
@@ -42,7 +47,7 @@ header {
     &.options,
     &.pitches {
       flex-direction: column;
-      position: fixed;
+      //position: fixed;
       top: 0;
       left: 100vw;
       width: 100%;

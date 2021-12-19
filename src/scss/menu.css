@@ -7,20 +7,30 @@ header ul {
   list-style: none;
 }
 header button {
-  width: 2.75em;
-  height: 2.75em;
+  width: 3.4375em;
+  height: 3.4375em;
   padding: 0;
   margin: 0;
   border: 0;
 }
 header nav {
   position: fixed;
-  top: 0.625em;
-  right: 0.625em;
+  bottom: 0;
+  right: 0;
   z-index: 2002;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  background: chartreuse;
+  width: 100%;
+  padding: 0.625em;
 }
 header nav.menu button {
   margin-right: 0.625em;
+  background: #fff;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
@@ -35,7 +45,6 @@ header nav.players, header nav.options, header nav.pitches {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  position: fixed;
   top: 0;
   left: 100vw;
   width: 100%;
