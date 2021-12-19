@@ -41,6 +41,7 @@ export default {
     playerInfo: {
       type: Object,
     },
+
     displayOptions: {
       type: Object,
       default: function () {

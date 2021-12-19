@@ -39,7 +39,8 @@ header {
     }
 
     &.players,
-    &.options {
+    &.options,
+    &.pitches {
       flex-direction: column;
       position: fixed;
       top: 0;
@@ -58,7 +59,8 @@ header {
       }
     }
 
-    &.options {
+    &.options,
+    &.pitches {
       li {
         margin-top: em(10px);
       }

@@ -3,13 +3,16 @@
     <Menu
       :playerID="playerID"
       :displayOptions="displayOptions"
+      :pitchMenu="pitchMenu"
       @changePlayer="updatePlayer"
       @changeCookieOptions="updateCookieOptions"
     />
     <Player
       :playerID="playerID"
       :displayOptions="displayOptions"
+      :pitchMenu="pitchMenu"
       @changePlayer="updatePlayer"
+      @changePitchMenu="updatePitchMenu"
     />
   </div>
 </template>
@@ -33,6 +36,7 @@ export default {
   data() {
     return {
       playerID: 105859,
+      pitchMenu: {},
       displayOptions: {
         showPlayerBanner: true,
         showPhoto: true,
@@ -49,10 +53,9 @@ export default {
       document.cookie = `playerID=${Number(newPlayer)}`;
     },
 
-    // updateOptions(options) {
-    //   // console.log("Parent updateOptions", options);
-    //   this.displayOptions[options.id] = options.checked;
-    // },
+    updatePitchMenu(pitchMenu) {
+      this.pitchMenu = pitchMenu;
+    },
 
     updateCookieOptions() {
       this.updateCookies();

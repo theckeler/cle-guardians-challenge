@@ -30,7 +30,7 @@ header nav.menu button:last-child {
 header nav.menu button.active {
   background: red;
 }
-header nav.players, header nav.options {
+header nav.players, header nav.options, header nav.pitches {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -47,16 +47,16 @@ header nav.players, header nav.options {
   transition: left 0.3s ease-in-out;
   z-index: 2001;
 }
-header nav.players.active, header nav.options.active {
+header nav.players.active, header nav.options.active, header nav.pitches.active {
   left: 0;
 }
-header nav.options li {
+header nav.options li, header nav.pitches li {
   margin-top: 0.625em;
 }
-header nav.options ul ul {
+header nav.options ul ul, header nav.pitches ul ul {
   margin-top: 0.625em;
 }
-header nav.options label {
+header nav.options label, header nav.pitches label {
   position: relative;
   z-index: 1;
   display: -webkit-box;
@@ -73,7 +73,7 @@ header nav.options label {
   transition: all 0.3s ease-in-out;
   background: #fff;
 }
-header nav.options input[type=checkbox] {
+header nav.options input[type=checkbox], header nav.pitches input[type=checkbox] {
   position: absolute;
   top: 0;
   left: 0;
@@ -86,7 +86,7 @@ header nav.options input[type=checkbox] {
   margin: 0;
   padding: 0;
 }
-header nav.options input[type=checkbox]:checked + label {
+header nav.options input[type=checkbox]:checked + label, header nav.pitches input[type=checkbox]:checked + label {
   font-weight: 700;
   background: red;
 }

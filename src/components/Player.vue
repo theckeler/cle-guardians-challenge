@@ -39,6 +39,11 @@ export default {
     playerID: {
       type: Number,
     },
+
+    pitchMenu: {
+      type: Object,
+    },
+
     displayOptions: {
       type: Object,
       default: function () {
@@ -82,23 +87,15 @@ export default {
         .then((data) => {
           this.pitches = data.pitches;
 
-          // let temp = [];
-          // this.pitches.forEach((p) => {
-          //   //if (!(p.pitchType in temp)) {
-          //   temp = p.pitchType;
-          //   // }
-          // });
-          // console.log(temp);
-
-          const pitchMenu = this.pitches
-            .map((p) => p.pitchType)
-            .filter((pitchType, index, arr) => arr.indexOf(pitchType) == index)
-            .sort();
-          console.log(pitchMenu);
+          const pitchMenu = {};
+          this.pitches.forEach((p) => {
+            pitchMenu[p.pitchName] = p.pitchType;
+          });
+          this.$emit("changePitchMenu", pitchMenu);
 
           setTimeout(() => {
             this.loading = false;
-          }, 500);
+          }, 1000);
         });
     },
   },
