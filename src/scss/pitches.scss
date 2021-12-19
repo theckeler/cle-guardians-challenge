@@ -1,0 +1,111 @@
+.pitch-plot-container {
+  svg {
+    width: 100%;
+    background: #daf1f8;
+
+    circle {
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      padding: 0;
+      margin: 0;
+      width: calc(100% / 6);
+
+      &.all {
+        label {
+          background: black;
+        }
+      }
+
+      &.sn {
+        label {
+          background: red;
+        }
+      }
+
+      &.ch {
+        label {
+          background: yellow;
+        }
+      }
+
+      &.ct {
+        label {
+          background: blue;
+        }
+      }
+
+      &.sl {
+        label {
+          background: orange;
+        }
+      }
+
+      &.fb {
+        label {
+          background: green;
+        }
+      }
+
+      &.cb {
+        label {
+          background: pink;
+        }
+      }
+    }
+  }
+
+  form {
+    li {
+      position: relative;
+    }
+
+    input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      background: transparent;
+      border: none;
+      margin: 0;
+      padding: 0;
+
+      &:checked + label {
+        font-weight: 700;
+        border: 3px solid #000;
+      }
+    }
+
+    label {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      border: 3px solid transparent;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  .pitch-nav {
+    position: sticky;
+    bottom: 0;
+  }
+}

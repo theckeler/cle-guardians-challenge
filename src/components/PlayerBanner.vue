@@ -1,34 +1,36 @@
 <template>
-  <div class="player-banner">
-    <!-- https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/{imgid}/headshot/67/current -->
-
+  <div class="player-banner" v-if="displayOptions.showPlayerBanner">
     <div class="player-hero">
-      <h1 class="player-name">{{ playerInfo.fullName }}</h1>
+      <div class="player-info">
+        <h1 class="player-name">{{ playerInfo.fullName }}</h1>
+        <div v-if="displayOptions.showBio">
+          <h2>Bio:</h2>
+          <ul class="player-bio columns">
+            <li>Age:</li>
+            <li>{{ Math.round(playerInfo.ageDecimal) }}</li>
+            <li>Position:</li>
+            <li>{{ playerInfo.position }}</li>
+            <li>Throws:</li>
+            <li>
+              {{ playerInfo.throws === "R" ? "Right" : "Left" }}
+            </li>
+          </ul>
+        </div>
+        <div v-if="displayOptions.showContractInfo">
+          <h2>Contract Info:</h2>
+          <ul class="player-contract-info player-bio columns">
+            <li>Org:</li>
+            <li>{{ playerInfo.orgAbbr }}</li>
+            <li>Service Time:</li>
+            <li>{{ Math.round(playerInfo.serviceTime) }} Years</li>
+          </ul>
+        </div>
+      </div>
       <img
-        src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/615698/headshot/67/current"
+        :src="`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${playerInfo.imgId}/headshot/67/current`"
         :alt="playerInfo.fullName"
+        v-if="displayOptions.showPhoto"
       />
-    </div>
-
-    <div class="player-info">
-      <h2>Bio:</h2>
-      <ul class="player-bio">
-        <li>Age:</li>
-        <li>{{ Math.round(playerInfo.ageDecimal) }}</li>
-        <li>Position:</li>
-        <li>{{ playerInfo.position }}</li>
-        <li>Throws:</li>
-        <li>
-          {{ playerInfo.throws === "R" ? "Right" : "Left" }}
-        </li>
-      </ul>
-      <h2>Contract Info:</h2>
-      <ul class="player-contract-info">
-        <li>Org:</li>
-        <li>{{ playerInfo.orgAbbr }}</li>
-        <li>Service Time:</li>
-        <li>{{ Math.round(playerInfo.serviceTime) }} Years</li>
-      </ul>
     </div>
   </div>
 </template>
@@ -38,10 +40,23 @@ export default {
   props: {
     playerInfo: {
       type: Object,
-      default: null,
+    },
+    displayOptions: {
+      type: Object,
+      default: function () {
+        return {
+          showPlayerBanner: true,
+          showPhoto: true,
+          showBio: true,
+          showContractInfo: true,
+          showPitches: true,
+        };
+      },
     },
   },
-  mounted() {},
+  mounted() {
+    //console.log("displayOptions", this.displayOptions);
+  },
 };
 </script>
 

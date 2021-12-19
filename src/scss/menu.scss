@@ -1,0 +1,82 @@
+@import "functions";
+
+header {
+  ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  button {
+    width: em(44px);
+    height: em(44px);
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: em(10px);
+    right: em(10px);
+    z-index: 2002;
+    //    width: em(44px);
+
+    &.menu {
+      button {
+        margin-right: em(10px);
+        transition: all 0.3s ease-in-out;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &.active {
+          background: red;
+        }
+      }
+    }
+
+    &.players,
+    &.options {
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 100vw;
+      width: 100%;
+      height: 100vh;
+      background: orange;
+      padding: em(70px) em(20px);
+      overflow-y: auto;
+      transition: left 0.3s ease-in-out;
+      z-index: 2001;
+
+      &.active {
+        left: 0;
+      }
+    }
+
+    ul {
+      flex-direction: column;
+
+      ul {
+        padding-left: em(20px);
+      }
+
+      li {
+        button {
+          width: 100%;
+          padding: em(10px);
+          border: 0;
+        }
+
+        &.active {
+          button {
+            background: red;
+          }
+        }
+      }
+    }
+  }
+}
