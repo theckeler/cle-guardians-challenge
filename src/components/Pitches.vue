@@ -91,7 +91,8 @@
 
     <nav class="pi">
       <form v-on:submit.prevent>
-        <ul>
+       
+        <!-- <ul >
           <li class="sn">
             <input
               type="checkbox"
@@ -158,7 +159,7 @@
             />
             <label for="cb">CB</label>
           </li>
-        </ul>
+        </ul> -->
       </form>
     </nav>
   </div>
@@ -187,6 +188,7 @@ export default {
       },
     },
   },
+
   data() {
     // const allActive = "active";
     const min = 4 / 12;
@@ -213,34 +215,38 @@ export default {
       },
     };
   },
+
   computed: {
     selectableItems() {
       return this.pitches.filter((p) => p.isSelectable);
     },
   },
+
   methods: {
     scaleY(v) {
       return this.coordSystem.maxY - v + this.coordSystem.minY;
     },
+
     whatColor(pitchType) {
       //console.log("pitchType", pitchType);
       switch (pitchType) {
         case "SN":
-          return "red";
+          return "#FF7F0E";
         case "CH":
-          return "yellow";
+          return "#1F77B4";
         case "CT":
-          return "blue";
+          return "#8C564B";
         case "SL":
-          return "orange";
+          return "#E377C2";
         case "FB":
-          return "green";
+          return "#D62728";
         case "CB":
-          return "pink";
+          return "#9467BD";
         default:
           return "black";
       }
     },
+
     onClickButton(e) {
       if (e.target.checked) {
         document.querySelectorAll("." + e.target.name).forEach((el) => {
@@ -252,12 +258,12 @@ export default {
         });
       }
     },
+
     pitchSelect(el) {
-      //console.log(this.pitches[el.target.attributes.index.value]);
       console.log(el.target.attributes.index.value);
       this.selectedPitch = this.pitches[el.target.attributes.index.value];
-      // console.log(this.pitches[el.target.attributes.index.value]);
     },
+
     consoleOutput(el) {
       console.log(el);
     },

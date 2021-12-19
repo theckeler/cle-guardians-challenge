@@ -20,10 +20,16 @@ import Player from "./components/Player";
 
 export default {
   name: "App",
+
   components: {
     Menu,
     Player,
   },
+
+  created() {
+    this.updateCookies();
+  },
+
   data() {
     return {
       playerID: 105859,
@@ -36,9 +42,9 @@ export default {
       },
     };
   },
+
   methods: {
     updatePlayer(newPlayer) {
-      //  console.log("newData", Number(newPlayer));
       this.playerID = Number(newPlayer);
       document.cookie = `playerID=${Number(newPlayer)}`;
     },
@@ -49,18 +55,28 @@ export default {
     // },
 
     updateCookieOptions() {
-      let cookies = document.cookie.split(";");
-      cookies.forEach((cookie) => {
-        let cookiePair = cookie.split("=");
-        let cookiePharsed = JSON.parse(cookiePair[1]);
-        // Object.keys(cookiePharsed).forEach((cookieName) => {
-        //   console.log("cookieUpdate", cookieUpdate);
-        // });
+      this.updateCookies();
+    },
 
-        for (const [key, value] of Object.entries(cookiePharsed)) {
-          console.log(`${key}: ${value}`);
-        }
-      });
+    updateCookies() {
+      if (document.cookie) {
+        let cookies;
+
+        cookies = document.cookie.replace(/\s/g, "");
+        cookies = cookies.split(";");
+
+        cookies.forEach((cookie) => {
+          let cookiePair = cookie.split("=");
+          if (cookiePair[0] === "displayOptions") {
+            let cookiePharsed = JSON.parse(cookiePair[1]);
+            for (const [c, b] of Object.entries(cookiePharsed)) {
+              this.displayOptions[c] = b;
+            }
+          } else {
+            this[cookiePair[0]] = Number(cookiePair[1]);
+          }
+        });
+      }
     },
   },
 };

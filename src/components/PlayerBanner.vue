@@ -54,9 +54,6 @@ export default {
       },
     },
   },
-  mounted() {
-    //console.log("displayOptions", this.displayOptions);
-  },
 };
 </script>
 

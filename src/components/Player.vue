@@ -25,13 +25,16 @@ export default {
     PlayerBanner,
     PitchPlot,
   },
+
   data() {
     return {
       loading: true,
       playerInfo: {},
       pitches: null,
+      pitchButtons: {},
     };
   },
+
   props: {
     playerID: {
       type: Number,
@@ -49,20 +52,19 @@ export default {
       },
     },
   },
+
   watch: {
     playerID: function () {
-      //console.log("watching");
       this.fetchData();
     },
   },
+
   mounted() {
-    //  console.log("this.playerID", this.playerID);
     this.fetchData();
   },
+
   methods: {
     fetchData() {
-      //console.log("fetchData", Number(this.playerID));
-
       let fetchURL =
         "https://cle-fe-challenge-services.vercel.app/api/players?playerId=" +
         this.playerID;
@@ -70,7 +72,6 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           this.playerInfo = data.playerDetail;
-          //console.log("playerDetail", data.playerDetail);
         });
 
       fetchURL =
@@ -80,6 +81,21 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           this.pitches = data.pitches;
+
+          // let temp = [];
+          // this.pitches.forEach((p) => {
+          //   //if (!(p.pitchType in temp)) {
+          //   temp = p.pitchType;
+          //   // }
+          // });
+          // console.log(temp);
+
+          const pitchMenu = this.pitches
+            .map((p) => p.pitchType)
+            .filter((pitchType, index, arr) => arr.indexOf(pitchType) == index)
+            .sort();
+          console.log(pitchMenu);
+
           setTimeout(() => {
             this.loading = false;
           }, 500);

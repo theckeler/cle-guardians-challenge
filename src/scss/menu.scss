@@ -46,6 +46,7 @@ header {
       left: 100vw;
       width: 100%;
       height: 100vh;
+      // ----------------------------> MUST CHANGE
       background: orange;
       padding: em(70px) em(20px);
       overflow-y: auto;
@@ -54,6 +55,46 @@ header {
 
       &.active {
         left: 0;
+      }
+    }
+
+    &.options {
+      li {
+        margin-top: em(10px);
+      }
+
+      ul ul {
+        margin-top: em(10px);
+      }
+
+      label {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: em(10px);
+        transition: all 0.3s ease-in-out;
+        background: #fff;
+      }
+
+      input[type="checkbox"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background: transparent;
+        border: none;
+        margin: 0;
+        padding: 0;
+
+        &:checked + label {
+          font-weight: 700;
+          background: red;
+        }
       }
     }
 

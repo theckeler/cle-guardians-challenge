@@ -32,37 +32,37 @@
 
       &.sn {
         label {
-          background: red;
+          background: #ff7f0e;
         }
       }
 
       &.ch {
         label {
-          background: yellow;
+          background: #1f77b4;
         }
       }
 
       &.ct {
         label {
-          background: blue;
+          background: #8c564b;
         }
       }
 
       &.sl {
         label {
-          background: orange;
+          background: #e377c2;
         }
       }
 
       &.fb {
         label {
-          background: green;
+          background: #d62728;
         }
       }
 
       &.cb {
         label {
-          background: pink;
+          background: #9467bd;
         }
       }
     }
@@ -73,7 +73,7 @@
       position: relative;
     }
 
-    input {
+    input[type="checkbox"] {
       position: absolute;
       top: 0;
       left: 0;

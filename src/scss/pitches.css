@@ -27,27 +27,27 @@
   background: black;
 }
 .pitch-plot-container ul li.sn label {
-  background: red;
+  background: #ff7f0e;
 }
 .pitch-plot-container ul li.ch label {
-  background: yellow;
+  background: #1f77b4;
 }
 .pitch-plot-container ul li.ct label {
-  background: blue;
+  background: #8c564b;
 }
 .pitch-plot-container ul li.sl label {
-  background: orange;
+  background: #e377c2;
 }
 .pitch-plot-container ul li.fb label {
-  background: green;
+  background: #d62728;
 }
 .pitch-plot-container ul li.cb label {
-  background: pink;
+  background: #9467bd;
 }
 .pitch-plot-container form li {
   position: relative;
 }
-.pitch-plot-container form input {
+.pitch-plot-container form input[type=checkbox] {
   position: absolute;
   top: 0;
   left: 0;
@@ -60,7 +60,7 @@
   margin: 0;
   padding: 0;
 }
-.pitch-plot-container form input:checked + label {
+.pitch-plot-container form input[type=checkbox]:checked + label {
   font-weight: 700;
   border: 3px solid #000;
 }

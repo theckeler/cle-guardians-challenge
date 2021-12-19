@@ -2,8 +2,8 @@
   <header>
     <nav class="menu">
       <button
-        v-on:click="mainMenu"
-        v-on:keyup.enter="mainMenu"
+        v-on:click="openMenu('mainMenu')"
+        v-on:keyup.enter="openMenu('mainMenu')"
         v-bind:class="{ active: mainMenuActive }"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -13,8 +13,8 @@
       </button>
 
       <button
-        v-on:click="playerMenu"
-        v-on:keyup.enter="playerMenu"
+        v-on:click="openMenu('playerMenu')"
+        v-on:keyup.enter="openMenu('playerMenu')"
         v-bind:class="{ active: playerMenuActive }"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -57,7 +57,7 @@
             name="changeOptions"
             v-on:click="changeCookieOptions"
             v-on:keyup.enter="changeCookieOptions"
-            checked
+            :checked="displayOptions.showPlayerBanner"
           />
           <label for="showPlayerBanner">Player Panel</label>
           <ul>
@@ -68,7 +68,7 @@
                 name="changeOptions"
                 v-on:click="changeCookieOptions"
                 v-on:keyup.enter="changeCookieOptions"
-                checked
+                :checked="displayOptions.showPhoto"
               />
               <label for="showPhoto">Player Photo</label>
             </li>
@@ -79,7 +79,7 @@
                 name="changeOptions"
                 v-on:click="changeCookieOptions"
                 v-on:keyup.enter="changeCookieOptions"
-                checked
+                :checked="displayOptions.showBio"
               />
               <label for="showBio">Player Bio</label>
             </li>
@@ -90,7 +90,7 @@
                 name="changeOptions"
                 v-on:click="changeCookieOptions"
                 v-on:keyup.enter="changeCookieOptions"
-                checked
+                :checked="displayOptions.showContractInfo"
               />
               <label for="showContractInfo">Player Contract Info</label>
             </li>
@@ -103,7 +103,7 @@
             name="changeOptions"
             v-on:click="changeCookieOptions"
             v-on:keyup.enter="changeCookieOptions"
-            checked
+            :checked="displayOptions.showPitches"
           />
           <label for="showPitches">Player Pitches</label>
         </li>
@@ -121,6 +121,7 @@ export default {
       players: {},
     };
   },
+
   props: {
     playerID: {
       type: Number,
@@ -131,40 +132,41 @@ export default {
   },
 
   methods: {
-    playerMenu() {
-      if (this.playerMenuActive === true) {
-        this.playerMenuActive = false;
+    openMenu(whatMenu) {
+      if (this[whatMenu + "Active"] === true) {
+        this[whatMenu + "Active"] = false;
         document.querySelector("body").classList.remove("active");
       } else {
-        this.playerMenuActive = true;
+        this[whatMenu + "Active"] = true;
         document.querySelector("body").classList.add("active");
       }
     },
 
-    mainMenu() {
-      if (this.mainMenuActive === true) {
-        this.mainMenuActive = false;
-        document.querySelector("body").classList.remove("active");
-      } else {
-        this.mainMenuActive = true;
-        document.querySelector("body").classList.add("active");
-      }
-    },
+    // playerMenu() {
+    //   if (this.playerMenuActive === true) {
+    //     this.playerMenuActive = false;
+    //     document.querySelector("body").classList.remove("active");
+    //   } else {
+    //     this.playerMenuActive = true;
+    //     document.querySelector("body").classList.add("active");
+    //   }
+    // },
+
+    // mainMenu() {
+    //   if (this.mainMenuActive === true) {
+    //     this.mainMenuActive = false;
+    //     document.querySelector("body").classList.remove("active");
+    //   } else {
+    //     this.mainMenuActive = true;
+    //     document.querySelector("body").classList.add("active");
+    //   }
+    // },
 
     changePlayer(el) {
       this.$emit("changePlayer", Number(el.target.value));
       this.playerMenuActive = false;
       document.querySelector("body").classList.remove("active");
     },
-
-    // changeOptions(el) {
-    //   //console.log(el.target.checked);
-    //   const options = this.selectDeselectAll(el);
-
-    //   options.forEach((option) => {
-    //     this.$emit("changeOptions", { id: option.id, checked: option.checked });
-    //   });
-    // },
 
     changeCookieOptions(el) {
       const options = this.selectDeselectAll(el);

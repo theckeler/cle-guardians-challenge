@@ -50,6 +50,46 @@ header nav.players, header nav.options {
 header nav.players.active, header nav.options.active {
   left: 0;
 }
+header nav.options li {
+  margin-top: 0.625em;
+}
+header nav.options ul ul {
+  margin-top: 0.625em;
+}
+header nav.options label {
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.625em;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background: #fff;
+}
+header nav.options input[type=checkbox] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+header nav.options input[type=checkbox]:checked + label {
+  font-weight: 700;
+  background: red;
+}
 header nav ul {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
