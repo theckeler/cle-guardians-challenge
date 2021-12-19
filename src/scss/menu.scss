@@ -47,6 +47,7 @@ header {
     &.options,
     &.pitches {
       flex-direction: column;
+      justify-content: flex-start;
       //position: fixed;
       top: 0;
       left: 100vw;
@@ -54,7 +55,7 @@ header {
       height: 100vh;
       // ----------------------------> MUST CHANGE
       background: orange;
-      padding: em(70px) em(20px);
+      padding: em(20px) em(20px) em(80px) em(20px);
       overflow-y: auto;
       transition: left 0.3s ease-in-out;
       z-index: 2001;

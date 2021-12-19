@@ -11,6 +11,7 @@
 .player-banner .player-hero {
   overflow: hidden;
   position: relative;
+  height: 100%;
 }
 .player-banner .player-hero img {
   -o-object-fit: cover;
@@ -27,7 +28,7 @@
 .player-banner .player-info {
   position: relative;
   z-index: 1;
-  padding: 5em 1.25em 1.25em 1.25em;
+  padding: 1.25em;
   width: 100%;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
   text-transform: uppercase;

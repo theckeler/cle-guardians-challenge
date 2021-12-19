@@ -1,8 +1,8 @@
 <template>
-  <div class="player-banner" v-if="displayOptions.showPlayerBanner">
-    <div class="player-hero">
+  <div class="player-banner">
+    <h1>{{ playerInfo.fullName }}</h1>
+    <div class="player-hero" v-if="displayOptions.showPlayerBanner">
       <div class="player-info">
-        <h1 class="player-name">{{ playerInfo.fullName }}</h1>
         <div v-if="displayOptions.showBio">
           <h2>Bio:</h2>
           <ul class="player-bio columns">

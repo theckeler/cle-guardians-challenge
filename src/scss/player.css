@@ -3,10 +3,18 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+.player-page .player-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  height: calc(100vh - 46px);
+  width: 100%;
+}
+.player-page .player-container > * {
+  height: 50%;
 }

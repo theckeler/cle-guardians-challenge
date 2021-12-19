@@ -4,63 +4,59 @@
     class="pitch-plot-container"
     v-if="displayOptions.showPitches"
   >
-    <div class="pitch-plot">
-      <!-- <svg
+    <!-- <svg
         @mouseup="mouseupFunc($event)"
         @mousedown="mousedownFunc($event)"
         @mousemove="mousemoveFunc($event)"
       > -->
-      <svg
-        style="display: block"
-        :viewBox="
-          coordSystem.minX +
-          ' ' +
-          coordSystem.minY +
-          ' ' +
-          coordSystem.width +
-          ' ' +
-          coordSystem.height
-        "
-        preserveAspectRatio="xMidYMid meet"
-        ref="svg"
-      >
-        <rect
-          :x="strikezoneCoords.x"
-          :y="scaleY(strikezoneCoords.y)"
-          :width="strikezoneCoords.width"
-          :height="strikezoneCoords.height"
-          stroke="#000000"
-          :stroke-width="0.02"
-          fill-opacity="0"
-        ></rect>
-        <template v-for="(p, i) in pitches">
-          <!-- <circle
+    <svg
+      style="display: block"
+      :viewBox="
+        coordSystem.minX +
+        ' ' +
+        coordSystem.minY +
+        ' ' +
+        coordSystem.width +
+        ' ' +
+        coordSystem.height
+      "
+      preserveAspectRatio="xMidYMid meet"
+      ref="svg"
+    >
+      <rect
+        :x="strikezoneCoords.x"
+        :y="scaleY(strikezoneCoords.y)"
+        stroke="#000000"
+        :stroke-width="0.02"
+        fill-opacity="0"
+      ></rect>
+      <template v-for="(p, i) in pitches">
+        <!-- <circle
             :load="consoleOutput(p)"
           /> -->
-          <circle
-            :key="'pitch-' + i"
-            :cx="p.x"
-            :cy="scaleY(p.y)"
-            :r="1.5 / 12"
-            :fill="whatColor(p.pitchType)"
-            :class="[
-              p.pitchType.toLowerCase(),
-              'active',
-              {
-                visible: p.isVisible,
-              },
-              { selected: p.isSelected },
-            ]"
-            :id="'pitch-' + i"
-            :index="i"
-            :pitchNum="p.pitchNum"
-            :fill-opacity="p.isSelected ? 1 : p.fillOpacity"
-            :stroke-width="p.isSelected ? p.selectedStrokeWidth : p.strokeWidth"
-            v-on:click="pitchSelect"
-          />
-        </template>
-      </svg>
-    </div>
+        <circle
+          :key="'pitch-' + i"
+          :cx="p.x"
+          :cy="scaleY(p.y)"
+          :r="1.5 / 12"
+          :fill="whatColor(p.pitchType)"
+          :class="[
+            p.pitchType.toLowerCase(),
+            'active',
+            {
+              visible: p.isVisible,
+            },
+            { selected: p.isSelected },
+          ]"
+          :id="'pitch-' + i"
+          :index="i"
+          :pitchNum="p.pitchNum"
+          :fill-opacity="p.isSelected ? 1 : p.fillOpacity"
+          :stroke-width="p.isSelected ? p.selectedStrokeWidth : p.strokeWidth"
+          v-on:click="pitchSelect"
+        />
+      </template>
+    </svg>
 
     <div class="pitch-info" v-if="selectedPitch">
       <ul class="columns two">
@@ -91,7 +87,6 @@
 
     <nav class="pi">
       <form v-on:submit.prevent>
-       
         <!-- <ul >
           <li class="sn">
             <input

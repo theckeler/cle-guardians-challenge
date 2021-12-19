@@ -1,9 +1,8 @@
 <template>
   <div class="player-page">
     <div v-if="loading" class="loading"></div>
-    <div v-if="playerID">
+    <div class="player-container" v-if="playerID">
       <PlayerBanner
-        v-if="displayOptions.showPlayerBanner"
         :playerInfo="playerInfo"
         :displayOptions="displayOptions"
         class=""
