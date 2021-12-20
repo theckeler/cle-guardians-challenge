@@ -1,59 +1,47 @@
 <template>
   <div
     ref="container"
-    class="pitch-plot-container"
+    class="pitch-list-container"
     v-if="displayOptions.showPitches"
   >
-    <svg
-      style="display: block"
-      :viewBox="
-        coordSystem.minX +
-        ' ' +
-        coordSystem.minY +
-        ' ' +
-        coordSystem.width +
-        ' ' +
-        coordSystem.height
-      "
-      preserveAspectRatio="xMidYMid meet"
-      ref="svg"
-      id="pitch-plot-svg"
-    >
-      <rect
-        :x="strikezoneCoords.x"
-        :y="scaleY(strikezoneCoords.y)"
-        :width="strikezoneCoords.width"
-        :height="strikezoneCoords.height"
-        stroke="#000000"
-        :stroke-width="0.02"
-        fill-opacity="0"
-      ></rect>
-      <template v-for="(p, i) in pitches">
-        <!-- <circle
-            :load="consoleOutput(p)"
-          /> -->
-        <circle
-          :key="'pitch-' + i"
-          :cx="p.x"
-          :cy="scaleY(p.y)"
-          :r="1.5 / 12"
-          :fill="whatColor(p.pitchType)"
-          :class="[
-            'pitch-plot active',
-            p.pitchType.toLowerCase(),
-            {
-              visible: p.isVisible,
-            },
-            { selected: p.isSelected },
-          ]"
-          :id="'pitch-' + i"
-          :index="i"
-          :pitchNum="p.pitchNum"
-          :fill-opacity="p.isSelected ? 1 : p.fillOpacity"
-          v-on:click="pitchSelect"
-        />
-      </template>
-    </svg>
+    <ul>
+      <li
+        v-for="(p, i) in pitches"
+        :key="'pitch-' + i"
+        :id="'pitch-list-' + i"
+        :class="'pitch-list active ' + p.pitchType.toLowerCase()"
+      >
+        <ul class="columns two">
+          <li class="test">pitch #:</li>
+          <li>{{ p.pitchNum }}</li>
+          <li>gameDate</li>
+          <li>{{ p.gameDate }}</li>
+          <li>pitchName</li>
+          <li>{{ p.pitchName }}</li>
+          <li>batApproachGroup</li>
+          <li>{{ p.batApproachGroup }}</li>
+          <li>cut</li>
+          <li>{{ p.cut }}</li>
+          <li>rise</li>
+          <li>{{ p.rise }}</li>
+          <li>balls</li>
+          <li>{{ p.balls }}</li>
+          <li>strikes:</li>
+          <li>{{ p.strikes }}</li>
+          <li>swing</li>
+          <li>{{ p.swing }}</li>
+          <li>miss:</li>
+          <li>{{ p.miss }}</li>
+          <li>inStrikeZone:</li>
+          <li>{{ p.inStrikeZone }}</li>
+          <li>batterName:</li>
+          <li>{{ p.batterName }}</li>
+          <li>result:</li>
+          <li>{{ p.result }}</li>
+        </ul>
+        <button :index="i" v-on:click="pitchSelect">Select</button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -89,6 +77,7 @@ export default {
   },
 
   data() {
+    // const allActive = "active";
     const min = 4 / 12;
     const max = 56 / 12;
     const coordSystem = {
@@ -103,6 +92,7 @@ export default {
     return {
       height: null,
       svg: null,
+      //selectedPitch: null,
       coordSystem,
       strikezoneCoords: {
         x: -8.5 / 12,
@@ -144,9 +134,11 @@ export default {
     },
 
     pitchSelect(el) {
-      if (el.target.classList.contains("active")) {
-        this.$emit("changeSelectedPitch", el);
-      }
+      // console.log("pitchSelect", el);
+      //  console.log("pitchSelect", el.target.attributes.index.value);
+      // el.target.parentElement.classList.add("selected");
+      //this.selectedPitch = this.pitches[el.target.attributes.index.value];
+      this.$emit("changeSelectedPitch", el);
     },
 
     consoleOutput(el) {
@@ -157,5 +149,5 @@ export default {
 </script>
 
 <style scoped lang="css">
-@import "../scss/pitches.min.css";
+@import "../scss/pitch-list.min.css";
 </style>

@@ -7,9 +7,18 @@
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   opacity: 0;
+  stroke: #fff;
+  stroke-width: 0.005;
+  r: 0;
 }
 .pitch-plot-container svg circle.active {
   opacity: 1;
+  r: 0.125;
+}
+.pitch-plot-container svg circle.selected {
+  opacity: 1;
+  stroke: #000;
+  stroke-width: 0.05;
 }
 .pitch-plot-container svg rect {
   stroke: #000;
@@ -85,7 +94,6 @@
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.pitch-plot-container .pitch-nav {
-  position: sticky;
-  bottom: 0;
+.pitch-plot-container .pitch-info {
+  padding: 1.25em 1.25em 6.25em 1.25em;
 }

@@ -41,6 +41,7 @@ header nav.menu button.active {
   background: red;
 }
 header nav.players, header nav.options, header nav.pitches {
+  z-index: 2001;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -48,19 +49,20 @@ header nav.players, header nav.options, header nav.pitches {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  top: 0;
-  left: 100vw;
+  bottom: -100vh;
+  left: 0;
   width: 100%;
-  height: 100vh;
+  height: 50vh;
   background: orange;
   padding: 1.25em 1.25em 5em 1.25em;
   overflow-y: auto;
-  -webkit-transition: left 0.3s ease-in-out;
-  transition: left 0.3s ease-in-out;
-  z-index: 2001;
+  -webkit-box-shadow: 0 0 20px #000;
+          box-shadow: 0 0 20px #000;
+  -webkit-transition: bottom 0.3s ease-in-out;
+  transition: bottom 0.3s ease-in-out;
 }
 header nav.players.active, header nav.options.active, header nav.pitches.active {
-  left: 0;
+  bottom: 0;
 }
 header nav.options li, header nav.pitches li {
   position: relative;
@@ -119,4 +121,17 @@ header nav ul li button {
 }
 header nav ul li.active button {
   background: red;
+}
+header .loading {
+  top: initial;
+  bottom: 0;
+  z-index: 2000;
+  opacity: 0;
+  max-height: 0;
+  -webkit-transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.3s ease-in-out;
+}
+header .loading.active {
+  max-height: 1000vh;
+  opacity: 0.5;
 }

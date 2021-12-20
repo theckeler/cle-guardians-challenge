@@ -146,6 +146,8 @@
         </li>
       </ul>
     </nav>
+
+    <div class="loading"></div>
   </header>
 </template>
 
@@ -174,21 +176,21 @@ export default {
 
   methods: {
     changePitchOptions(e) {
-      console.log(e.target.name);
-      e.target.classList.toggle("active");
+      let selected = document.querySelectorAll(".selected");
+      if (selected.length) {
+        selected.forEach((check) => {
+          check.classList.remove("selected");
+        });
+      }
 
       if (e.target.checked) {
-        console.log("checked");
-        document.querySelectorAll("." + e.target.name).forEach((el) => {
-          console.log("add");
-          el.classList.add("active");
-        });
+        document
+          .querySelectorAll("." + e.target.name)
+          .forEach((el) => el.classList.add("active"));
       } else {
-        console.log("else");
-        document.querySelectorAll("." + e.target.name).forEach((el) => {
-          console.log("remove");
-          el.classList.remove("active");
-        });
+        document
+          .querySelectorAll("." + e.target.name)
+          .forEach((el) => el.classList.remove("active"));
       }
     },
 
@@ -196,19 +198,27 @@ export default {
       if (this[whatMenu + "Active"] === true) {
         this[whatMenu + "Active"] = false;
         document.querySelector("body").classList.remove("active");
+        document.querySelector("header .loading").classList.remove("active");
       } else {
         this.mainMenuActive = false;
         this.playerMenuActive = false;
         this.pitchMenuActive = false;
         this[whatMenu + "Active"] = true;
-        document.querySelector("body").classList.toggle("active");
+        document.querySelector("body").classList.add("active");
+        document.querySelector("header .loading").classList.add("active");
       }
     },
 
     changePlayer(el) {
       this.$emit("changePlayer", Number(el.target.value));
-      this.playerMenuActive = false;
+      document
+        .querySelectorAll(".menu.pitches input[type=checkbox]")
+        .forEach((el) => (el.checked = true));
       document.querySelector("body").classList.remove("active");
+      document.querySelector(".pitch-list-container").scrollTop = 0;
+
+      document.querySelector("header .loading").classList.remove("active");
+      this.playerMenuActive = false;
     },
 
     changeCookieOptions(el) {

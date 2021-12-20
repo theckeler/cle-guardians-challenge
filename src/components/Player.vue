@@ -8,9 +8,18 @@
         class=""
       />
       <PitchPlot
-        :displayOptions="displayOptions"
         v-if="pitches"
+        :displayOptions="displayOptions"
+        :selectedPitch="selectedPitch"
         :pitches="pitches"
+        @changeSelectedPitch="updateSelectedPitch"
+      />
+      <PitchList
+        v-if="pitches"
+        :displayOptions="displayOptions"
+        :selectedPitch="selectedPitch"
+        :pitches="pitches"
+        @changeSelectedPitch="updateSelectedPitch"
       />
     </div>
   </div>
@@ -18,11 +27,13 @@
 <script>
 import PlayerBanner from "./PlayerBanner.vue";
 import PitchPlot from "./Pitches.vue";
+import PitchList from "./PitchList.vue";
 
 export default {
   components: {
     PlayerBanner,
     PitchPlot,
+    PitchList,
   },
 
   data() {
@@ -31,6 +42,7 @@ export default {
       playerInfo: {},
       pitches: null,
       pitchButtons: {},
+      selectedPitch: null,
     };
   },
 
@@ -68,6 +80,40 @@ export default {
   },
 
   methods: {
+    updateSelectedPitch(el) {
+      this.selectedPitch = Number(el.target.attributes.index.value);
+
+      let selected = document.querySelectorAll(".selected");
+      let pitchPlotEl = document.querySelector(
+        `.pitch-plot-container circle[index="${this.selectedPitch}"]`
+      );
+      let parentEl = document.querySelector(".pitch-plot-container svg");
+
+      if (selected.length) {
+        selected.forEach((check) => {
+          check.classList.remove("selected"); // REMOVE ALL .selected
+        });
+      }
+      pitchPlotEl.classList.add("selected"); // ADD .selected
+
+      // Move to the top .selected
+      parentEl.removeChild(pitchPlotEl);
+      parentEl.appendChild(pitchPlotEl);
+
+      // Scoll .pitch-list-container
+      const scrollToThis = document.querySelector(
+        `#pitch-list-${this.selectedPitch}`
+      );
+      selected = document.querySelectorAll(".pitch-list-container li");
+      if (selected.length) {
+        selected.forEach((check) => {
+          check.classList.remove("selected");
+        });
+      }
+      scrollToThis.scrollIntoView();
+      scrollToThis.classList.add("selected");
+    },
+
     fetchData() {
       let fetchURL =
         "https://cle-fe-challenge-services.vercel.app/api/players?playerId=" +
@@ -84,7 +130,9 @@ export default {
       fetch(fetchURL)
         .then((res) => res.json())
         .then((data) => {
-          this.pitches = data.pitches;
+          this.pitches = data.pitches.sort((a, b) =>
+            a.pitchNum > b.pitchNum ? 1 : -1
+          );
 
           const pitchMenu = {};
           this.pitches.forEach((p) => {

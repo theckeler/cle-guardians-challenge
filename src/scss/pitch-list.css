@@ -1,0 +1,34 @@
+.pitch-list-container {
+  max-height: 25em;
+  overflow-y: auto;
+}
+.pitch-list-container > ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.pitch-list-container > ul > li {
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+.pitch-list-container > ul > li ul {
+  padding: 0.625em;
+  margin-bottom: 0.625em;
+}
+.pitch-list-container > ul > li:last-of-type {
+  margin-bottom: 0;
+}
+.pitch-list-container > ul > li.active {
+  max-height: 1000px;
+}
+.pitch-list-container > ul > li.selected {
+  background: #dadada;
+}
