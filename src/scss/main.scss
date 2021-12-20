@@ -5,6 +5,7 @@ body {
   //padding: 0 0 em(100px) 0;
   padding: 0;
   margin: 0;
+  font-size: rem(16px);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
@@ -43,6 +44,13 @@ img {
   height: auto;
 }
 
+h2,
+p,
+ul,
+li {
+  margin: 0 0 em(4px) 0;
+}
+
 h1 {
   text-transform: uppercase;
   position: fixed;
@@ -55,11 +63,8 @@ h1 {
   font-size: rem(22px);
 }
 
-h2,
-p,
-ul,
-li {
-  margin: 0 0 em(10px) 0;
+h2 {
+  font-size: rem(18px);
 }
 
 .hide {

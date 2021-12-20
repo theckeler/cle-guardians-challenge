@@ -53,12 +53,12 @@
           <input
             type="checkbox"
             :id="pitchShort"
-            name="changePitches"
+            :name="pitchShort.toLowerCase()"
             v-on:click="changePitchOptions"
             v-on:keyup.enter="changePitchOptions"
             checked
           />
-          <label for="showPhoto">{{ pitchName }}</label>
+          <label :for="pitchShort">{{ pitchName }}</label>
         </li>
       </ul>
     </nav>
@@ -173,6 +173,25 @@ export default {
   },
 
   methods: {
+    changePitchOptions(e) {
+      console.log(e.target.name);
+      e.target.classList.toggle("active");
+
+      if (e.target.checked) {
+        console.log("checked");
+        document.querySelectorAll("." + e.target.name).forEach((el) => {
+          console.log("add");
+          el.classList.add("active");
+        });
+      } else {
+        console.log("else");
+        document.querySelectorAll("." + e.target.name).forEach((el) => {
+          console.log("remove");
+          el.classList.remove("active");
+        });
+      }
+    },
+
     openMenu(whatMenu) {
       if (this[whatMenu + "Active"] === true) {
         this[whatMenu + "Active"] = false;
@@ -215,8 +234,6 @@ export default {
       const options = document.querySelectorAll("input[name='changeOptions']");
       return options;
     },
-
-    changePitchOptions() {},
   },
 
   mounted() {

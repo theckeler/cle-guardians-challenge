@@ -63,6 +63,7 @@ header nav.players.active, header nav.options.active, header nav.pitches.active 
   left: 0;
 }
 header nav.options li, header nav.pitches li {
+  position: relative;
   margin-top: 0.625em;
 }
 header nav.options ul ul, header nav.pitches ul ul {
@@ -70,7 +71,7 @@ header nav.options ul ul, header nav.pitches ul ul {
 }
 header nav.options label, header nav.pitches label {
   position: relative;
-  z-index: 1;
+  z-index: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -88,7 +89,7 @@ header nav.options label, header nav.pitches label {
 header nav.options input[type=checkbox], header nav.pitches input[type=checkbox] {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 1;
   z-index: 0;
   width: 100%;
   height: 100%;

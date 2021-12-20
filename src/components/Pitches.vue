@@ -26,6 +26,8 @@
       <rect
         :x="strikezoneCoords.x"
         :y="scaleY(strikezoneCoords.y)"
+        :width="strikezoneCoords.width"
+        :height="strikezoneCoords.height"
         stroke="#000000"
         :stroke-width="0.02"
         fill-opacity="0"
@@ -40,6 +42,8 @@
           :cy="scaleY(p.y)"
           :r="1.5 / 12"
           :fill="whatColor(p.pitchType)"
+          stroke-width="0.005"
+          stroke="#fff"
           :class="[
             p.pitchType.toLowerCase(),
             'active',
@@ -52,7 +56,6 @@
           :index="i"
           :pitchNum="p.pitchNum"
           :fill-opacity="p.isSelected ? 1 : p.fillOpacity"
-          :stroke-width="p.isSelected ? p.selectedStrokeWidth : p.strokeWidth"
           v-on:click="pitchSelect"
         />
       </template>
@@ -242,17 +245,17 @@ export default {
       }
     },
 
-    onClickButton(e) {
-      if (e.target.checked) {
-        document.querySelectorAll("." + e.target.name).forEach((el) => {
-          el.classList.add("active");
-        });
-      } else {
-        document.querySelectorAll("." + e.target.name).forEach((el) => {
-          el.classList.remove("active");
-        });
-      }
-    },
+    // onClickButton(e) {
+    //   if (e.target.checked) {
+    //     document.querySelectorAll("." + e.target.name).forEach((el) => {
+    //       el.classList.add("active");
+    //     });
+    //   } else {
+    //     document.querySelectorAll("." + e.target.name).forEach((el) => {
+    //       el.classList.remove("active");
+    //     });
+    //   }
+    // },
 
     pitchSelect(el) {
       console.log(el.target.attributes.index.value);

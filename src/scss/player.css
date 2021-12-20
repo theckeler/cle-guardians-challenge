@@ -12,9 +12,16 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: calc(100vh - 46px);
+  height: calc(100vh - 66px);
   width: 100%;
 }
-.player-page .player-container > * {
-  height: 50%;
+.player-page .player-container .player-banner {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.player-page .player-container .pitch-plot-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }

@@ -11,6 +11,9 @@
 .pitch-plot-container svg circle.active {
   opacity: 1;
 }
+.pitch-plot-container svg rect {
+  stroke: #000;
+}
 .pitch-plot-container ul {
   display: -webkit-box;
   display: -ms-flexbox;
