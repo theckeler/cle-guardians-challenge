@@ -11,11 +11,12 @@ export default {
   components: {
     Player,
   },
-  mounted() {
-    //console.log("mounted");
-    setTimeout(function () {
-      window.scrollTo(0, 1);
-    }, 0);
+  beforeUpdate() {
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        window.scrollTo(0, 1);
+      }, 0);
+    });
   },
 };
 </script>
