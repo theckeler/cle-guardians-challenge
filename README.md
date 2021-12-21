@@ -1,4 +1,4 @@
-# cle-test
+# cle-test Project for CLE Guardians
 
 ## Project setup
 
