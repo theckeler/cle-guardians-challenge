@@ -1,6 +1,7 @@
 <template>
   <div class="player-page">
     <h1>{{ playerInfo.fullName }}</h1>
+    
     <div v-if="loading" class="loading">
       <div class="logo">
         <svg
@@ -27,6 +28,7 @@
         </div>
       </div>
     </div>
+    
     <div
       :class="`player-container children-${this.numChildren}`"
       v-if="playerID"
@@ -76,17 +78,13 @@ export default {
       pitchButtons: {},
       selectedPitch: null,
       numChildren: null,
+      sortBy: "gameDate",
     };
   },
 
   props: {
     playerID: {
       type: Number,
-    },
-
-    sortBy: {
-      type: String,
-      default: "gameDate",
     },
 
     pitchMenu: {
@@ -126,8 +124,8 @@ export default {
 
   methods: {
     updateSortBy(reSort) {
-      console.log("updateSortBy", reSort);
-      //this.sortBy = reSort;
+      //console.log("updateSortBy", reSort.target.value);
+      this.sortBy = reSort.target.value;
     },
 
     checkNumChildren() {

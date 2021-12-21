@@ -24,11 +24,10 @@
         </ul>
       </div>
     </div>
-    <div class="player-img">
+    <div class="player-img" v-if="displayOptions.showPhoto">
       <img
         :src="`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${playerInfo.imgId}/headshot/67/current`"
         :alt="playerInfo.fullName"
-        v-if="displayOptions.showPhoto"
       />
     </div>
   </div>

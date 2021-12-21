@@ -160,7 +160,7 @@
       </ul>
     </nav>
 
-    <div class="loading"></div>
+    <div class="loading" v-on:click="closeMenus"></div>
   </header>
 </template>
 
@@ -209,9 +209,7 @@ export default {
 
     openMenu(whatMenu) {
       if (this[whatMenu + "Active"] === true) {
-        this[whatMenu + "Active"] = false;
-        document.querySelector("body").classList.remove("active");
-        document.querySelector("header .loading").classList.remove("active");
+        this.closeMenus();
       } else {
         this.mainMenuActive = false;
         this.playerMenuActive = false;
@@ -222,16 +220,22 @@ export default {
       }
     },
 
+    closeMenus() {
+      this.mainMenuActive = false;
+      this.playerMenuActive = false;
+      this.pitchMenuActive = false;
+      document.querySelector("body").classList.remove("active");
+      document.querySelector("header .loading").classList.remove("active");
+    },
+
     changePlayer(el) {
       this.$emit("changePlayer", Number(el.target.value));
       document
         .querySelectorAll(".menu.pitches input[type=checkbox]")
         .forEach((el) => (el.checked = true));
-      document.querySelector("body").classList.remove("active");
       document.querySelector(".pitch-list-container").scrollTop = 0;
 
-      document.querySelector("header .loading").classList.remove("active");
-      this.playerMenuActive = false;
+      this.closeMenus();
     },
 
     changeCookieOptions(el) {

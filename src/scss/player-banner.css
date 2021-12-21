@@ -9,7 +9,8 @@
   position: relative;
   z-index: 1;
   padding: 0.375em 0.625em;
-  width: 60%;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
   background: #fff;
   font-size: 0.75em;
 }
@@ -20,7 +21,8 @@
 }
 .player-banner .player-img {
   position: relative;
-  width: 40%;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
 }
 .player-banner .player-img img {
   -o-object-fit: cover;

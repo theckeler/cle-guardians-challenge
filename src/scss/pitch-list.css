@@ -23,12 +23,22 @@
 }
 .pitch-list-container > ul > li {
   margin: 0;
+  padding: 0.625em;
   max-height: 0;
   overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #c9c9c9;
 }
-.pitch-list-container > ul > li ul {
-  padding: 0.625em;
-  margin-bottom: 0.625em;
+.pitch-list-container > ul > li button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.pitch-list-container > ul > li ul li {
+  padding: 0.125em 0.25em;
 }
 .pitch-list-container > ul > li:last-of-type {
   margin-bottom: 0;

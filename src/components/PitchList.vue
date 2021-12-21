@@ -4,17 +4,16 @@
     class="pitch-list-container"
     v-if="displayOptions.showPitches"
   >
-    <div class="sort-by">
+    <!-- <div class="sort-by">
       <select @change="changeSortBy">
-        <option>Pitcher ID</option>
-        <option>Game Date</option>
-        <option>Game ID</option>
-        <option>Pitch Nums</option>
-        <option>Pitch Type</option>
-        <option>Batter</option>
-        <option>Result</option>
+        <option value="gameDate">Game Date</option>
+        <option value="gameId">Game ID</option>
+        <option value="pitchNum">Pitch Nums</option>
+        <option value="pitchType">Pitch Type</option>
+        <option value="batterId">Batter</option>
+        <option value="result">Result</option>
       </select>
-    </div>
+    </div> -->
     <ul>
       <li
         v-for="(p, i) in pitches"
@@ -23,33 +22,32 @@
         :class="'pitch-list active ' + p.pitchType.toLowerCase()"
       >
         <ul class="columns two">
+          <li>Game Date:</li>
+          <li>{{ new Date(p.gameDate).toDateString() }}</li>
           <li class="test">pitch #:</li>
           <li>{{ p.pitchNum }}</li>
-          <li>gameDate</li>
-          <li>{{ p.gameDate }}</li>
-          <li>pitchName</li>
+          <li>Pitch:</li>
           <li>{{ p.pitchName }}</li>
-          <li>batApproachGroup</li>
-          <li>{{ p.batApproachGroup }}</li>
-          <li>cut</li>
-          <li>{{ p.cut }}</li>
-          <li>rise</li>
-          <li>{{ p.rise }}</li>
-          <li>balls</li>
-          <li>{{ p.balls }}</li>
-          <li>strikes:</li>
-          <li>{{ p.strikes }}</li>
-          <li>swing</li>
-          <li>{{ p.swing }}</li>
-          <li>miss:</li>
-          <li>{{ p.miss }}</li>
-          <li>inStrikeZone:</li>
-          <li>{{ p.inStrikeZone }}</li>
-          <li>batterName:</li>
+          <li>Batter:</li>
           <li>{{ p.batterName }}</li>
-          <li>result:</li>
-          <li>{{ p.result }}</li>
+          <li>Bat Approach:</li>
+          <li>{{ p.batApproachGroup }}</li>
+          <li>Cut:</li>
+          <li>{{ p.cut }}</li>
+          <li>Rise:</li>
+          <li>{{ p.rise }}</li>
+          <!-- <li>Result:</li>
+          <li>{{ p.result }}</li> -->
         </ul>
+
+        <ul>
+          <li>
+            {{
+              pitchResult(p.balls, p.strikes, p.swing, p.miss, p.inStrikeZone)
+            }}
+          </li>
+        </ul>
+
         <button :index="i" v-on:click="pitchSelect">Select</button>
       </li>
     </ul>
@@ -121,13 +119,21 @@ export default {
   },
 
   methods: {
-    changeSortBy() {
-      console.log("changeSortBy");
-      this.$emit("changeSortBy");
+    changeSortBy(sortBy) {
+      //console.log("changeSortBy");
+      this.$emit("changeSortBy", sortBy);
     },
 
     scaleY(v) {
       return this.coordSystem.maxY - v + this.coordSystem.minY;
+    },
+
+    pitchResult(balls, strikes, swing, miss, inStrikeZone) {
+      return `The pitch was a ${balls ? "ball" : ""} ${
+        strikes ? "strike" : ""
+      }${inStrikeZone ? " in the strike zone" : ""}${
+        swing ? ", the batter swings" : ""
+      } ${miss ? "and missed" : ""}`;
     },
 
     whatColor(pitchType) {
