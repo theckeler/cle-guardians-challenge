@@ -1,6 +1,19 @@
 <template>
   <header>
     <nav class="menu icons">
+      <div class="logo">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xml:space="preserve"
+          viewBox="0 0 144 204"
+        >
+          <path
+            fill="#003263"
+            d="M110.5 72.4H144V0h-33.5v7.9l-8-7.9H34.1L0 34v136l34 34h76l33.7-33.7v-38.9h-33.2v24.7l-14.1 14H48.9L34 155.3V48l14.5-14.4h48l14.1 14.1z"
+          />
+        </svg>
+      </div>
+
       <button
         v-if="playerID"
         v-on:click="openMenu('mainMenu')"
@@ -133,7 +146,7 @@
             </li>
           </ul>
         </li>
-        <li>
+        <!-- <li>
           <input
             type="checkbox"
             id="showPitches"
@@ -143,7 +156,7 @@
             :checked="displayOptions.showPitches"
           />
           <label for="showPitches">Player Pitches</label>
-        </li>
+        </li> -->
       </ul>
     </nav>
 

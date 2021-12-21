@@ -15,13 +15,19 @@
   height: calc(100vh - 66px);
   width: 100%;
 }
-.player-page .player-container .player-banner {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+.player-page .player-container > * {
+  border-bottom: 2px solid #333;
 }
-.player-page .player-container .pitch-plot-container {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+.player-page .player-container .player-banner {
+  min-height: 6.25em;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+.player-page .player-container.children-3 .pitch-plot-container,
+.player-page .player-container.children-3 .pitch-list-container {
+  height: 33%;
+}
+.player-page .player-container.children-2 .pitch-plot-container,
+.player-page .player-container.children-2 .pitch-list-container {
+  height: 50%;
 }

@@ -2,28 +2,27 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   background: #b9b9b9;
-}
-.player-banner .player-hero {
-  overflow: hidden;
   position: relative;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
 }
-.player-banner .player-hero img {
+.player-banner .player-info {
+  position: relative;
+  z-index: 1;
+  padding: 0.375em 0.625em;
+  width: 60%;
+  background: #fff;
+  font-size: 0.75em;
+}
+.player-banner .player-info h2 {
+  font-size: 1em;
+  padding: 0.375em 0.625em;
+  background: rgba(0, 50, 99, 0.2);
+}
+.player-banner .player-img {
+  position: relative;
+  width: 40%;
+}
+.player-banner .player-img img {
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
@@ -34,13 +33,4 @@
   bottom: 0;
   left: 0;
   z-index: 0;
-}
-.player-banner .player-info {
-  position: relative;
-  z-index: 1;
-  padding: 0.625em 1.25em;
-  width: 100%;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.2);
 }

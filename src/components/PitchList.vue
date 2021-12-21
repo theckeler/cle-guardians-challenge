@@ -4,6 +4,17 @@
     class="pitch-list-container"
     v-if="displayOptions.showPitches"
   >
+    <div class="sort-by">
+      <select @change="changeSortBy">
+        <option>Pitcher ID</option>
+        <option>Game Date</option>
+        <option>Game ID</option>
+        <option>Pitch Nums</option>
+        <option>Pitch Type</option>
+        <option>Batter</option>
+        <option>Result</option>
+      </select>
+    </div>
     <ul>
       <li
         v-for="(p, i) in pitches"
@@ -110,6 +121,11 @@ export default {
   },
 
   methods: {
+    changeSortBy() {
+      console.log("changeSortBy");
+      this.$emit("changeSortBy");
+    },
+
     scaleY(v) {
       return this.coordSystem.maxY - v + this.coordSystem.minY;
     },
@@ -134,10 +150,6 @@ export default {
     },
 
     pitchSelect(el) {
-      // console.log("pitchSelect", el);
-      //  console.log("pitchSelect", el.target.attributes.index.value);
-      // el.target.parentElement.classList.add("selected");
-      //this.selectedPitch = this.pitches[el.target.attributes.index.value];
       this.$emit("changeSelectedPitch", el);
     },
 

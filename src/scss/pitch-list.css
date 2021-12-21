@@ -1,6 +1,13 @@
 .pitch-list-container {
   max-height: 25em;
   overflow-y: auto;
+  position: relative;
+}
+.pitch-list-container .sort-by {
+  padding: 0.25em;
+}
+.pitch-list-container .sort-by select {
+  width: 100%;
 }
 .pitch-list-container > ul {
   display: -webkit-box;

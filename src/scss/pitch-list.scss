@@ -4,6 +4,14 @@
   max-height: em(400px);
   overflow-y: auto;
   //scroll-behavior: smooth;
+  position: relative;
+
+  .sort-by {
+    padding: em(4px);
+    select {
+      width: 100%;
+    }
+  }
 
   > ul {
     display: flex;
