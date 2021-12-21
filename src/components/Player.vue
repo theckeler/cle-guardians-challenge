@@ -167,7 +167,7 @@ export default {
 
     fetchData() {
       let fetchURL =
-        "https://cle-fe-challenge-services.vercel.app/api/players?playerId=" +
+        "https://cle-endpoints.consumedesign.com/api/players?playerId=" +
         this.playerID;
       fetch(fetchURL)
         .then((res) => res.json())
@@ -176,7 +176,7 @@ export default {
         });
 
       fetchURL =
-        "https://cle-fe-challenge-services.vercel.app/api/pitches?playerId=" +
+        "https://cle-endpoints.consumedesign.com/api/pitches?playerId=" +
         this.playerID;
       fetch(fetchURL)
         .then((res) => res.json())
