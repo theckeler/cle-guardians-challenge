@@ -100,26 +100,7 @@ export default {
     };
   },
 
-  props: {
-    // playerID: {
-    //   type: Number,
-    // },
-    // pitchMenu: {
-    //   type: Object,
-    // },
-    // displayOptions: {
-    //   type: Object,
-    //   default: function () {
-    //     return {
-    //       showPlayerInfo: true,
-    //       showPhoto: true,
-    //       showBio: true,
-    //       showContractInfo: true,
-    //       showPitches: true,
-    //     };
-    //   },
-    // },
-  },
+  props: {},
 
   created() {
     this.updateCookies();
@@ -133,8 +114,6 @@ export default {
 
   updated: function () {
     let numChildren = document.querySelector(".player-container");
-    //console.log(numChildren.children.length);
-    // numChildren.classList.add("num");
     this.numChildren = numChildren.children.length;
   },
 
@@ -144,7 +123,6 @@ export default {
 
   methods: {
     updateSortBy(reSort) {
-      //console.log("updateSortBy", reSort.target.value);
       this.sortBy = reSort.target.value;
     },
 
