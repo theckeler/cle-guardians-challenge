@@ -2,6 +2,8 @@
 
 .player-page {
   overflow: hidden;
+  height: 100vh;
+  max-height: 100%;
 
   .player-container {
     display: grid;
@@ -9,7 +11,8 @@
     grid-template-rows: em(180px) minmax(200px, 50%) 1fr em(65px);
     gap: 0;
     height: 100vh;
-    max-height: 100vh;
+    max-height: 100%;
+
     width: 100%;
 
     &.children-3 {
