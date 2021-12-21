@@ -9,8 +9,6 @@
     circle {
       transition: all 0.3s ease-in-out;
       opacity: 0;
-      // position: relative;
-      // z-index: 1;
       stroke: #fff;
       stroke-width: 0.005;
       r: 0;
@@ -22,7 +20,6 @@
 
       &.selected {
         opacity: 1;
-        //z-index: 1001;
         stroke: #000;
         stroke-width: 0.05;
       }

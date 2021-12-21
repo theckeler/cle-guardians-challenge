@@ -60,11 +60,6 @@ import { selectableMixin } from "../utility/selectable";
 export default {
   mixins: [selectableMixin],
   props: {
-    backgroundColor: {
-      default: "#DFDFDF",
-      type: String,
-    },
-
     pitches: {
       type: Array,
       default: () => [],

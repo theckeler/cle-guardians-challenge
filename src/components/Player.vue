@@ -1,7 +1,5 @@
 <template>
   <div class="player-page">
-    <h1>{{ playerInfo.fullName }}</h1>
-    
     <div v-if="loading" class="loading">
       <div class="logo">
         <svg
@@ -28,15 +26,16 @@
         </div>
       </div>
     </div>
-    
+
     <div
       :class="`player-container children-${this.numChildren}`"
       v-if="playerID"
     >
-      <PlayerBanner
-        v-if="displayOptions.showPlayerBanner"
+      <PlayerInfo
+        v-if="displayOptions.showPlayerInfo"
         :playerInfo="playerInfo"
         :displayOptions="displayOptions"
+        :inMenu="false"
         class=""
       />
       <PitchPlot
@@ -55,19 +54,29 @@
         @changeSelectedPitch="updateSelectedPitch"
         @changeSortBy="updateSortBy"
       />
+      <Menu
+        :playerID="playerID"
+        :displayOptions="displayOptions"
+        :pitchMenu="pitchMenu"
+        :playerInfo="playerInfo"
+        @changePlayer="updatePlayer"
+        @changeCookieOptions="updateCookieOptions"
+      />
     </div>
   </div>
 </template>
 <script>
-import PlayerBanner from "./PlayerBanner.vue";
+import PlayerInfo from "./PlayerInfo.vue";
 import PitchPlot from "./Pitches.vue";
 import PitchList from "./PitchList.vue";
+import Menu from "./Menu.vue";
 
 export default {
   components: {
-    PlayerBanner,
+    PlayerInfo,
     PitchPlot,
     PitchList,
+    Menu,
   },
 
   data() {
@@ -79,30 +88,41 @@ export default {
       selectedPitch: null,
       numChildren: null,
       sortBy: "gameDate",
+      playerID: 105859,
+      pitchMenu: {},
+      displayOptions: {
+        showPlayerInfo: true,
+        showPhoto: true,
+        showBio: true,
+        showContractInfo: true,
+        showPitches: true,
+      },
     };
   },
 
   props: {
-    playerID: {
-      type: Number,
-    },
+    // playerID: {
+    //   type: Number,
+    // },
+    // pitchMenu: {
+    //   type: Object,
+    // },
+    // displayOptions: {
+    //   type: Object,
+    //   default: function () {
+    //     return {
+    //       showPlayerInfo: true,
+    //       showPhoto: true,
+    //       showBio: true,
+    //       showContractInfo: true,
+    //       showPitches: true,
+    //     };
+    //   },
+    // },
+  },
 
-    pitchMenu: {
-      type: Object,
-    },
-
-    displayOptions: {
-      type: Object,
-      default: function () {
-        return {
-          showPlayerBanner: true,
-          showPhoto: true,
-          showBio: true,
-          showContractInfo: true,
-          showPitches: true,
-        };
-      },
-    },
+  created() {
+    this.updateCookies();
   },
 
   watch: {
@@ -191,13 +211,47 @@ export default {
           this.pitches.forEach((p) => {
             pitchMenu[p.pitchName] = p.pitchType;
           });
-          this.$emit("changePitchMenu", pitchMenu);
+          this.pitchMenu = pitchMenu;
 
           setTimeout(() => {
             document.querySelector("body").classList.remove("active");
             this.loading = false;
           }, 1000);
         });
+    },
+
+    updatePlayer(newPlayer) {
+      this.playerID = Number(newPlayer);
+      document.cookie = `playerID=${Number(newPlayer)}`;
+    },
+
+    updatePitchMenu(pitchMenu) {
+      this.pitchMenu = pitchMenu;
+    },
+
+    updateCookieOptions() {
+      this.updateCookies();
+    },
+
+    updateCookies() {
+      if (document.cookie) {
+        let cookies;
+
+        cookies = document.cookie.replace(/\s/g, "");
+        cookies = cookies.split(";");
+
+        cookies.forEach((cookie) => {
+          let cookiePair = cookie.split("=");
+          if (cookiePair[0] === "displayOptions") {
+            let cookiePharsed = JSON.parse(cookiePair[1]);
+            for (const [c, b] of Object.entries(cookiePharsed)) {
+              this.displayOptions[c] = b;
+            }
+          } else {
+            this[cookiePair[0]] = Number(cookiePair[1]);
+          }
+        });
+      }
     },
   },
 };

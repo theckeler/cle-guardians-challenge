@@ -1,7 +1,7 @@
 <template>
   <div class="player-banner">
     <div class="player-info">
-      <div v-if="displayOptions.showBio">
+      <div v-if="this.displayOptions.showBio || this.inMenu">
         <h2>Bio:</h2>
         <ul class="player-bio columns">
           <li>Age:</li>
@@ -14,7 +14,7 @@
           </li>
         </ul>
       </div>
-      <div v-if="displayOptions.showContractInfo">
+      <div v-if="displayOptions.showContractInfo || this.inMenu">
         <h2>Contract Info:</h2>
         <ul class="player-contract-info player-bio columns">
           <li>Org:</li>
@@ -24,7 +24,7 @@
         </ul>
       </div>
     </div>
-    <div class="player-img" v-if="displayOptions.showPhoto">
+    <div class="player-img" v-if="displayOptions.showPhoto || this.inMenu">
       <img
         :src="`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${playerInfo.imgId}/headshot/67/current`"
         :alt="playerInfo.fullName"
@@ -40,11 +40,15 @@ export default {
       type: Object,
     },
 
+    inMenu: {
+      type: Boolean,
+    },
+
     displayOptions: {
       type: Object,
       default: function () {
         return {
-          showPlayerBanner: true,
+          showPlayerInfo: true,
           showPhoto: true,
           showBio: true,
           showContractInfo: true,
@@ -57,5 +61,5 @@ export default {
 </script>
 
 <style scoped>
-@import "../scss/player-banner.min.css";
+@import "../scss/player-info.min.css";
 </style>

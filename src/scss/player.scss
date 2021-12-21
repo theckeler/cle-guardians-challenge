@@ -1,40 +1,31 @@
 @import "functions";
 
 .player-page {
-  position: relative;
-  display: flex;
-
-  .loading {
-  }
+  overflow: hidden;
 
   .player-container {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 66px);
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: em(180px) minmax(200px, 50%) 1fr em(65px);
+    gap: 0;
+    height: 100vh;
+    max-height: 100vh;
     width: 100%;
 
+    &.children-3 {
+      grid-template-rows: minmax(200px, 50%) minmax(200px, 50%) em(65px);
+    }
+
     > * {
-      //min-height: 50%;
       border-bottom: 2px solid #333;
+
+      &:last-child {
+        border: 0;
+      }
     }
 
     .player-banner {
-      min-height: em(100px);
-      flex-shrink: 1;
-    }
-
-    &.children-3 {
-      .pitch-plot-container,
-      .pitch-list-container {
-        height: 33%;
-      }
-    }
-
-    &.children-2 {
-      .pitch-plot-container,
-      .pitch-list-container {
-        height: 50%;
-      }
+      overflow: hidden;
     }
   }
 }

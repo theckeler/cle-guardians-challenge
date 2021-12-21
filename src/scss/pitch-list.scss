@@ -3,7 +3,7 @@
 .pitch-list-container {
   max-height: em(400px);
   overflow-y: auto;
-  //scroll-behavior: smooth;
+  scroll-behavior: smooth;
   position: relative;
 
   .sort-by {
@@ -22,11 +22,10 @@
 
     > li {
       margin: 0;
-      padding: em(10px);
+      padding: 0;
       max-height: 0;
       overflow: hidden;
       position: relative;
-      //text-transform: capitalize;
       border-bottom: 1px solid #c9c9c9;
 
       button {
@@ -39,8 +38,7 @@
       }
 
       ul {
-        // padding: em(10px);
-        //margin-bottom: em(10px);
+        padding: em(10px);
         li {
           padding: em(2px) em(4px);
         }
