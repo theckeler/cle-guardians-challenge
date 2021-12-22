@@ -13,6 +13,10 @@
     background: #fff;
     font-size: em(12px);
 
+    .columns {
+      flex-direction: row;
+    }
+
     h2 {
       font-size: em(16px);
       padding: em(6px) em(10px);
