@@ -6,9 +6,11 @@ header {
   .logo {
     width: em(45px);
     max-height: em(42px);
+
     svg {
-      width: 100%;
+      width: auto;
       height: 100%;
+      display: block;
     }
   }
 

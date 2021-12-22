@@ -8,8 +8,9 @@ header .logo {
   max-height: 2.625em;
 }
 header .logo svg {
-  width: 100%;
+  width: auto;
   height: 100%;
+  display: block;
 }
 header ul {
   display: -webkit-box;

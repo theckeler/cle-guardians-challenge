@@ -15,7 +15,6 @@ export default {
   mounted() {
     window.addEventListener("load", function () {
       setTimeout(function () {
-        console.log("scroll");
         window.scrollTo(0, 1);
       }, 0);
     });

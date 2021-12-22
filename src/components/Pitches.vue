@@ -31,9 +31,12 @@
       <template v-for="(p, i) in pitches">
         <!-- <circle
             :load="consoleOutput(p)"
-          /> -->
+              :r="1.5 / 12"
+      /> -->
         <circle
           :key="'pitch-' + i"
+          :ref="'pitch-' + i"
+          :id="'pitch-' + i"
           :cx="p.x"
           :cy="scaleY(p.y)"
           :r="1.5 / 12"
@@ -46,7 +49,6 @@
             },
             { selected: p.isSelected },
           ]"
-          :id="'pitch-' + i"
           :index="i"
           :pitchNum="p.pitchNum"
           :fill-opacity="p.isSelected ? 1 : p.fillOpacity"
@@ -115,6 +117,17 @@ export default {
   },
 
   methods: {
+    // checkClass(el) {
+    //   //console.log("checkClass", document.querySelector("#" + el));
+
+    //   if (el) {
+    //     console.log("active", el);
+    //     //   return 1.5 / 12;
+    //   } else {
+    //     //   return 0;
+    //   }
+    // },
+
     scaleY(v) {
       return this.coordSystem.maxY - v + this.coordSystem.minY;
     },
@@ -139,6 +152,7 @@ export default {
     },
 
     pitchSelect(el) {
+      // el.target.classList.add("selected");
       if (el.target.classList.contains("active")) {
         this.$emit("changeSelectedPitch", el);
       }

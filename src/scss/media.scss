@@ -47,15 +47,16 @@
 
       .player-banner {
         grid-area: player-banner;
+        border-left: 2px solid #333;
       }
 
       .pitch-plot-container {
         grid-area: playpitch-plot-container;
-        border-right: 2px solid #333;
       }
 
       .pitch-list-container {
         grid-area: pitch-list-container;
+        border-left: 2px solid #333;
       }
 
       header {
@@ -86,7 +87,7 @@
   }
 
   .pitch-plot-container svg {
-    width: auto;
+    width: 100%;
     height: 100%;
   }
 }

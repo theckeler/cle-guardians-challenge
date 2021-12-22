@@ -11,11 +11,11 @@
       opacity: 0;
       stroke: #fff;
       stroke-width: 0.005;
-      r: 0;
+      //r: 0;
 
       &.active {
         opacity: 1;
-        r: 0.125;
+        // r: 0.125;
       }
 
       &.selected {

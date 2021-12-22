@@ -9,11 +9,9 @@
   opacity: 0;
   stroke: #fff;
   stroke-width: 0.005;
-  r: 0;
 }
 .pitch-plot-container svg circle.active {
   opacity: 1;
-  r: 0.125;
 }
 .pitch-plot-container svg circle.selected {
   opacity: 1;
