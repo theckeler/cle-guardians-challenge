@@ -11,13 +11,15 @@ export default {
   components: {
     Player,
   },
-  // beforeUpdate() {
-  //   window.addEventListener("load", function () {
-  //     setTimeout(function () {
-  //       window.scrollTo(0, 1);
-  //     }, 0);
-  //   });
-  // },
+
+  mounted() {
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        console.log("scroll");
+        window.scrollTo(0, 1);
+      }, 0);
+    });
+  },
 };
 </script>
 
