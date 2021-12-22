@@ -237,15 +237,12 @@ export default {
       if (e.target.checked) {
         document.querySelectorAll("." + e.target.name).forEach((el) => {
           el.classList.add("active");
-          //el["r"] = "0.12";
           el.setAttribute("r", 0.12);
         });
       } else {
         document.querySelectorAll("." + e.target.name).forEach((el) => {
-          // console.log(el);
           el.classList.remove("active");
           el.setAttribute("r", 0);
-          //  Object.defineProperty(this, "r", { value: 0 });
         });
       }
     },
