@@ -1,0 +1,95 @@
+@import "functions";
+
+@media only screen and (min-width: em(414px)) {
+  h1 {
+    font-size: rem(18px);
+  }
+}
+
+@media only screen and (min-width: em(768px)) {
+  h1 {
+    font-size: rem(22px);
+  }
+}
+
+@media only screen and (max-width: em(767px)) and (max-height: em(1023px)) {
+  .player-page {
+    .player-container {
+      grid-template-rows: 0 1fr 1fr em(65px);
+
+      > * {
+        &:first-child {
+          border: 0;
+        }
+      }
+
+      .main-button {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: em(1024px)) {
+  .info-button,
+  .main-button {
+    display: none;
+  }
+
+  .player-page {
+    .player-container {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: em(65px) 300px 1fr;
+      grid-template-areas:
+        "header header"
+        "playpitch-plot-container player-banner"
+        "playpitch-plot-container pitch-list-container";
+
+      .player-banner {
+        grid-area: player-banner;
+      }
+
+      .pitch-plot-container {
+        grid-area: playpitch-plot-container;
+        border-right: 2px solid #333;
+      }
+
+      .pitch-list-container {
+        grid-area: pitch-list-container;
+      }
+
+      header {
+        grid-area: header;
+      }
+    }
+
+    .pitch-list-container {
+      max-height: initial;
+    }
+  }
+
+  header {
+    nav.players,
+    nav.options,
+    nav.pitches,
+    nav.info {
+      bottom: initial;
+      top: -100vh;
+      padding: 5em 1.25em 1.25em 1.25em;
+      transition: top 0.3s ease-in-out;
+
+      &.active {
+        bottom: initial;
+        top: 0;
+      }
+    }
+  }
+
+  .pitch-plot-container svg {
+    width: auto;
+    height: 100%;
+  }
+}
+
+@media (hover: hover) {
+}

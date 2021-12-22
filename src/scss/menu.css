@@ -27,9 +27,7 @@ header .icons button {
   border: 0;
 }
 header nav {
-  position: fixed;
-  bottom: 0;
-  right: 0;
+  position: relative;
   z-index: 2002;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -44,9 +42,6 @@ header nav.menu button {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-header nav.menu button:first-of-type {
-  margin-left: auto;
-}
 header nav.menu button:last-child {
   margin-right: 0;
 }
@@ -56,7 +51,19 @@ header nav.menu button.active {
 header nav.menu button.active svg {
   fill: #fff;
 }
-header nav.players, header nav.options, header nav.pitches {
+header nav.menu .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: auto;
+}
+header nav.players, header nav.options, header nav.pitches, header nav.info {
+  position: fixed;
+  bottom: 0;
+  right: 0;
   z-index: 2001;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -69,7 +76,7 @@ header nav.players, header nav.options, header nav.pitches {
   left: 0;
   width: 100%;
   max-height: 60vh;
-  background: #003263;
+  background: rgba(255, 255, 255, 0.8);
   padding: 1.25em 1.25em 5em 1.25em;
   overflow-y: auto;
   -webkit-box-shadow: 0 0 20px #000;
@@ -77,36 +84,35 @@ header nav.players, header nav.options, header nav.pitches {
   -webkit-transition: bottom 0.3s ease-in-out;
   transition: bottom 0.3s ease-in-out;
 }
-header nav.players.active, header nav.options.active, header nav.pitches.active {
+header nav.players.active, header nav.options.active, header nav.pitches.active, header nav.info.active {
   bottom: 0;
 }
 header nav.players li button,
 header nav.players li label, header nav.options li button,
 header nav.options li label, header nav.pitches li button,
-header nav.pitches li label {
+header nav.pitches li label, header nav.info li button,
+header nav.info li label {
   width: 100%;
   padding: 0.625em;
-  border: 0;
   text-transform: uppercase;
+  border-radius: 0.25em;
+  border: 1px solid #333;
+  font-size: 1rem;
+  text-align: center;
 }
-header nav.players li label, header nav.options li label, header nav.pitches li label {
+header nav.players li label, header nav.options li label, header nav.pitches li label, header nav.info li label {
   position: relative;
   z-index: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  display: block;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   padding: 0.625em;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background: #fff;
+  background: #c5c5c5;
 }
-header nav.players li input[type=checkbox], header nav.options li input[type=checkbox], header nav.pitches li input[type=checkbox] {
+header nav.players li input[type=checkbox], header nav.options li input[type=checkbox], header nav.pitches li input[type=checkbox], header nav.info li input[type=checkbox] {
   position: absolute;
   top: 0;
   left: 1;
@@ -114,17 +120,15 @@ header nav.players li input[type=checkbox], header nav.options li input[type=che
   width: 100%;
   height: 100%;
   opacity: 0;
-  background: transparent;
-  border: none;
   margin: 0;
   padding: 0;
 }
-header nav.players li input[type=checkbox]:checked + label, header nav.options li input[type=checkbox]:checked + label, header nav.pitches li input[type=checkbox]:checked + label {
-  background: #ce1126;
+header nav.players li input[type=checkbox]:checked + label, header nav.options li input[type=checkbox]:checked + label, header nav.pitches li input[type=checkbox]:checked + label, header nav.info li input[type=checkbox]:checked + label {
+  background: #27272a;
   color: #fff;
 }
-header nav.players li.active button, header nav.options li.active button, header nav.pitches li.active button {
-  background: #ce1126;
+header nav.players li.active button, header nav.options li.active button, header nav.pitches li.active button, header nav.info li.active button {
+  background: #27272a;
   color: #fff;
 }
 header nav.options li, header nav.pitches li {

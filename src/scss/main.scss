@@ -8,6 +8,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background: #fff;
+  min-height: -webkit-fill-available;
+  height: 100%;
+  max-height: 100%;
 
   &.active {
     overflow: hidden;
@@ -52,15 +55,11 @@ li {
 }
 
 h1 {
+  display: block;
   text-transform: uppercase;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 2000;
-  background: rgba(#fff, 0.6);
-  padding: em(2px) em(6px);
-  margin: 0;
-  font-size: rem(22px);
+  margin: 0 em(10px) 0 0;
+  font-size: rem(12px);
+  color: #fff;
 }
 
 h2 {
@@ -80,7 +79,6 @@ h2 {
   flex-wrap: wrap;
   list-style: none;
   padding: 0;
-  // margin: 0;
 
   li {
     width: 70%;
@@ -138,6 +136,8 @@ h2 {
     .anim {
       width: 10vw;
       height: 10vw;
+      max-width: em(60px);
+      max-height: em(60px);
       margin-top: em(20px);
       animation: spin 1000ms linear infinite;
     }
@@ -147,7 +147,7 @@ h2 {
         -webkit-transform: rotate(0deg);
       }
       100% {
-        -webkit-transform: rotate(360deg);
+        -webkit-transform: rotate(-360deg);
       }
     }
   }

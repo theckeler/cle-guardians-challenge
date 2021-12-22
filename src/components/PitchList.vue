@@ -36,8 +36,6 @@
           <li>{{ p.cut }}</li>
           <li>Rise:</li>
           <li>{{ p.rise }}</li>
-          <!-- <li>Result:</li>
-          <li>{{ p.result }}</li> -->
         </ul>
 
         <ul>
@@ -60,11 +58,6 @@ import { selectableMixin } from "../utility/selectable";
 export default {
   mixins: [selectableMixin],
   props: {
-    backgroundColor: {
-      default: "#DFDFDF",
-      type: String,
-    },
-
     pitches: {
       type: Array,
       default: () => [],
@@ -86,7 +79,6 @@ export default {
   },
 
   data() {
-    // const allActive = "active";
     const min = 4 / 12;
     const max = 56 / 12;
     const coordSystem = {
@@ -101,7 +93,6 @@ export default {
     return {
       height: null,
       svg: null,
-      //selectedPitch: null,
       coordSystem,
       strikezoneCoords: {
         x: -8.5 / 12,
@@ -120,7 +111,6 @@ export default {
 
   methods: {
     changeSortBy(sortBy) {
-      //console.log("changeSortBy");
       this.$emit("changeSortBy", sortBy);
     },
 
