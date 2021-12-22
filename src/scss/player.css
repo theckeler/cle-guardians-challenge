@@ -5,8 +5,13 @@
   display: grid;
   grid-template-columns: 100vw;
   grid-template-rows: 65px 1fr;
+  grid-template-areas: "header" "player-container";
+}
+.player-page header {
+  grid-area: header;
 }
 .player-page .player-container {
+  grid-area: player-container;
   display: grid;
   grid-template-columns: 100vw;
   grid-template-rows: 0 1fr minmax(12.5em, 25em);

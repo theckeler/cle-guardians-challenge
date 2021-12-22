@@ -8,11 +8,6 @@
     font-size: 1.375rem;
   }
 }
-@media only screen and (max-width: 47.9375em) and (max-height: 63.9375em) {
-  .player-page .player-container .main-button {
-    display: none;
-  }
-}
 @media only screen and (min-width: 64em) {
   header .info-button {
     display: none;
