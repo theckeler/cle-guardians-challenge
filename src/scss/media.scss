@@ -15,14 +15,6 @@
 @media only screen and (max-width: em(767px)) and (max-height: em(1023px)) {
   .player-page {
     .player-container {
-      grid-template-rows: 0 1fr 1fr em(65px);
-
-      > * {
-        &:first-child {
-          border: 0;
-        }
-      }
-
       .main-button {
         display: none;
       }
@@ -31,31 +23,44 @@
 }
 
 @media only screen and (min-width: em(1024px)) {
-  .info-button,
-  .main-button {
-    display: none;
+  header {
+    .info-button {
+      display: none;
+    }
+
+    .main-button {
+      display: block;
+    }
+  }
+
+  .pitch-plot-container svg {
+    max-height: calc(100vh - 65px);
   }
 
   .player-page {
     .player-container {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: em(65px) 300px 1fr;
+      grid-template-columns: 1fr minmax(em(400px), 30%);
+      grid-template-rows: 240px 1fr;
       grid-template-areas:
-        "header header"
         "playpitch-plot-container player-banner"
         "playpitch-plot-container pitch-list-container";
+      max-height: calc(100vh - 65px);
+
+      &.children-2 {
+        grid-template-columns: 1fr minmax(em(400px), 30%);
+        grid-template-rows: 1fr;
+        grid-template-areas: "playpitch-plot-container pitch-list-container";
+      }
 
       .player-banner {
-        grid-area: player-banner;
         border-left: 2px solid #333;
       }
 
       .pitch-plot-container {
-        grid-area: playpitch-plot-container;
+        border: 0;
       }
 
       .pitch-list-container {
-        grid-area: pitch-list-container;
         border-left: 2px solid #333;
       }
 

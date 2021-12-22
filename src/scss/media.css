@@ -9,36 +9,40 @@
   }
 }
 @media only screen and (max-width: 47.9375em) and (max-height: 63.9375em) {
-  .player-page .player-container {
-    grid-template-rows: 0 1fr 1fr 4.0625em;
-  }
-  .player-page .player-container > *:first-child {
-    border: 0;
-  }
   .player-page .player-container .main-button {
     display: none;
   }
 }
 @media only screen and (min-width: 64em) {
-  .info-button,
-.main-button {
+  header .info-button {
     display: none;
+  }
+  header .main-button {
+    display: block;
+  }
+
+  .pitch-plot-container svg {
+    max-height: calc(100vh - 65px);
   }
 
   .player-page .player-container {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 4.0625em 300px 1fr;
-    grid-template-areas: "header header" "playpitch-plot-container player-banner" "playpitch-plot-container pitch-list-container";
+    grid-template-columns: 1fr minmax(25em, 30%);
+    grid-template-rows: 240px 1fr;
+    grid-template-areas: "playpitch-plot-container player-banner" "playpitch-plot-container pitch-list-container";
+    max-height: calc(100vh - 65px);
+  }
+  .player-page .player-container.children-2 {
+    grid-template-columns: 1fr minmax(25em, 30%);
+    grid-template-rows: 1fr;
+    grid-template-areas: "playpitch-plot-container pitch-list-container";
   }
   .player-page .player-container .player-banner {
-    grid-area: player-banner;
     border-left: 2px solid #333;
   }
   .player-page .player-container .pitch-plot-container {
-    grid-area: playpitch-plot-container;
+    border: 0;
   }
   .player-page .player-container .pitch-list-container {
-    grid-area: pitch-list-container;
     border-left: 2px solid #333;
   }
   .player-page .player-container header {

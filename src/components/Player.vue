@@ -27,6 +27,15 @@
       </div>
     </div>
 
+    <Menu
+      :playerID="playerID"
+      :displayOptions="displayOptions"
+      :pitchMenu="pitchMenu"
+      :playerInfo="playerInfo"
+      @changePlayer="updatePlayer"
+      @changeCookieOptions="updateCookieOptions"
+    />
+
     <div
       :class="`player-container children-${this.numChildren}`"
       v-if="playerID"
@@ -53,14 +62,6 @@
         :pitches="pitches"
         @changeSelectedPitch="updateSelectedPitch"
         @changeSortBy="updateSortBy"
-      />
-      <Menu
-        :playerID="playerID"
-        :displayOptions="displayOptions"
-        :pitchMenu="pitchMenu"
-        :playerInfo="playerInfo"
-        @changePlayer="updatePlayer"
-        @changeCookieOptions="updateCookieOptions"
       />
     </div>
   </div>
@@ -161,7 +162,8 @@ export default {
           check.classList.remove("selected");
         });
       }
-      scrollToThis.scrollIntoView();
+      document.querySelector(".pitch-list-container").scrollTop =
+        scrollToThis.offsetTop;
       scrollToThis.classList.add("selected");
     },
 

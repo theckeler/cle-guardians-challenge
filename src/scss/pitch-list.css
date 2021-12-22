@@ -1,5 +1,4 @@
 .pitch-list-container {
-  max-height: 25em;
   overflow-y: auto;
   scroll-behavior: smooth;
   position: relative;

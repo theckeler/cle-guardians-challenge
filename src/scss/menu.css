@@ -3,6 +3,9 @@ header {
   display: -ms-flexbox;
   display: flex;
 }
+header .main-button {
+  display: none;
+}
 header .logo {
   width: 2.8125em;
   max-height: 2.625em;
@@ -63,7 +66,7 @@ header nav.menu .buttons {
 }
 header nav.players, header nav.options, header nav.pitches, header nav.info {
   position: fixed;
-  bottom: 0;
+  top: -100vh;
   right: 0;
   z-index: 2001;
   -webkit-box-orient: vertical;
@@ -73,20 +76,19 @@ header nav.players, header nav.options, header nav.pitches, header nav.info {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  bottom: -100vh;
   left: 0;
   width: 100%;
   max-height: 60vh;
   background: rgba(255, 255, 255, 0.8);
-  padding: 1.25em 1.25em 5em 1.25em;
+  padding: 5em 1.25em 1.25em 1.25em;
   overflow-y: auto;
   -webkit-box-shadow: 0 0 20px #000;
           box-shadow: 0 0 20px #000;
-  -webkit-transition: bottom 0.3s ease-in-out;
-  transition: bottom 0.3s ease-in-out;
+  -webkit-transition: top 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out;
 }
 header nav.players.active, header nav.options.active, header nav.pitches.active, header nav.info.active {
-  bottom: 0;
+  top: 0;
 }
 header nav.players li button,
 header nav.players li label, header nav.options li button,
@@ -148,8 +150,7 @@ header nav ul ul {
   padding-left: 1.25em;
 }
 header .loading {
-  top: initial;
-  bottom: 0;
+  top: 0;
   z-index: 2000;
   opacity: 0;
   max-height: 0;

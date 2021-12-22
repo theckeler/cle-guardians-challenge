@@ -2,18 +2,29 @@
   overflow: hidden;
   height: 100vh;
   max-height: 100%;
+  display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: 65px 1fr;
 }
 .player-page .player-container {
   display: grid;
   grid-template-columns: 100vw;
-  grid-template-rows: 11.25em minmax(200px, 50%) 1fr 4.0625em;
+  grid-template-rows: 0 1fr minmax(12.5em, 25em);
+  grid-template-areas: "player-banner" "playpitch-plot-container" "pitch-list-container";
   gap: 0;
-  height: 100vh;
-  max-height: 100%;
-  width: 100%;
 }
-.player-page .player-container.children-3 {
-  grid-template-rows: minmax(200px, 50%) minmax(200px, 50%) 4.0625em;
+.player-page .player-container.children-2 {
+  grid-template-rows: 1fr minmax(12.5em, 25em);
+  grid-template-areas: "playpitch-plot-container" "pitch-list-container";
+}
+.player-page .player-container .player-banner {
+  grid-area: player-banner;
+}
+.player-page .player-container .pitch-plot-container {
+  grid-area: playpitch-plot-container;
+}
+.player-page .player-container .pitch-list-container {
+  grid-area: pitch-list-container;
 }
 .player-page .player-container > * {
   border-bottom: 2px solid #333;

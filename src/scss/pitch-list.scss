@@ -1,7 +1,6 @@
 @import "functions";
 
 .pitch-list-container {
-  max-height: em(400px);
   overflow-y: auto;
   scroll-behavior: smooth;
   position: relative;

@@ -4,19 +4,37 @@
   overflow: hidden;
   height: 100vh;
   max-height: 100%;
+  display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: 65px 1fr;
 
   .player-container {
     display: grid;
     grid-template-columns: 100vw;
-    grid-template-rows: em(180px) minmax(200px, 50%) 1fr em(65px);
+    grid-template-rows: 0 1fr minmax(em(200px), em(400px));
+    grid-template-areas:
+      "player-banner"
+      "playpitch-plot-container"
+      "pitch-list-container";
     gap: 0;
-    height: 100vh;
-    max-height: 100%;
 
-    width: 100%;
+    &.children-2 {
+      grid-template-rows: 1fr minmax(em(200px), em(400px));
+      grid-template-areas:
+        "playpitch-plot-container"
+        "pitch-list-container";
+    }
 
-    &.children-3 {
-      grid-template-rows: minmax(200px, 50%) minmax(200px, 50%) em(65px);
+    .player-banner {
+      grid-area: player-banner;
+    }
+
+    .pitch-plot-container {
+      grid-area: playpitch-plot-container;
+    }
+
+    .pitch-list-container {
+      grid-area: pitch-list-container;
     }
 
     > * {
