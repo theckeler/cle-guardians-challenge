@@ -26,7 +26,6 @@
       max-height: 0;
       overflow: hidden;
       position: relative;
-      border-bottom: 1px solid #c9c9c9;
 
       button {
         position: absolute;
@@ -50,6 +49,7 @@
 
       &.active {
         max-height: 1000px;
+        border-bottom: 1px solid #c9c9c9;
       }
 
       &.selected {
