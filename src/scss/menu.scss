@@ -50,7 +50,12 @@ header {
       button {
         margin-right: em(10px);
         background: #fff;
+        border-radius: em(6px);
         transition: all 0.3s ease-in-out;
+
+        svg {
+          fill: #003263;
+        }
 
         &:last-child {
           margin-right: 0;
