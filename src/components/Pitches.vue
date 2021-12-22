@@ -117,17 +117,6 @@ export default {
   },
 
   methods: {
-    // checkClass(el) {
-    //   //console.log("checkClass", document.querySelector("#" + el));
-
-    //   if (el) {
-    //     console.log("active", el);
-    //     //   return 1.5 / 12;
-    //   } else {
-    //     //   return 0;
-    //   }
-    // },
-
     scaleY(v) {
       return this.coordSystem.maxY - v + this.coordSystem.minY;
     },
@@ -152,7 +141,6 @@ export default {
     },
 
     pitchSelect(el) {
-      // el.target.classList.add("selected");
       if (el.target.classList.contains("active")) {
         this.$emit("changeSelectedPitch", el);
       }
