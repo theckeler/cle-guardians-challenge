@@ -1,4 +1,4 @@
-# Project for CLE Guardians
+# Project for CLE Guardians v2
 
 ## Project setup
 
