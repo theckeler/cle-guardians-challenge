@@ -1,60 +1,45 @@
 @import "functions";
 
 .player-page {
-  overflow: hidden;
-  height: 100vh;
-  max-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   display: grid;
-  grid-template-columns: 100vw;
-  grid-template-rows: 65px 1fr;
+  grid-template-rows: 65px 0 1fr 1fr;
   grid-template-areas:
     "header"
-    "player-container";
+    "player-banner"
+    "playpitch-plot-container"
+    "pitch-list-container";
+
+  &.children-3 {
+    grid-template-rows: 65px 1fr 1fr;
+    grid-template-areas:
+      "header"
+      "playpitch-plot-container"
+      "pitch-list-container";
+  }
 
   header {
     grid-area: header;
+    border-bottom: 3px solid #333;
   }
 
-  .player-container {
-    grid-area: player-container;
-    display: grid;
-    grid-template-columns: 100vw;
-    grid-template-rows: 0 1fr minmax(em(200px), em(400px));
-    grid-template-areas:
-      "player-banner"
-      "playpitch-plot-container"
-      "pitch-list-container";
-    gap: 0;
+  .player-banner {
+    grid-area: player-banner;
+    overflow: hidden;
+  }
 
-    &.children-2 {
-      grid-template-rows: 1fr minmax(em(200px), em(400px));
-      grid-template-areas:
-        "playpitch-plot-container"
-        "pitch-list-container";
-    }
+  .pitch-plot-container {
+    grid-area: playpitch-plot-container;
+    border-bottom: 3px solid #333;
+  }
 
-    .player-banner {
-      grid-area: player-banner;
-    }
-
-    .pitch-plot-container {
-      grid-area: playpitch-plot-container;
-    }
-
-    .pitch-list-container {
-      grid-area: pitch-list-container;
-    }
-
-    > * {
-      border-bottom: 2px solid #333;
-
-      &:last-child {
-        border: 0;
-      }
-    }
-
-    .player-banner {
-      overflow: hidden;
-    }
+  .pitch-list-container {
+    height: 100%;
+    max-height: 400px;
+    grid-area: pitch-list-container;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="player-page">
+  <div class="player-page" :class="`children-${this.numChildren}`">
     <div v-if="loading" class="loading">
       <div class="logo">
         <svg
@@ -36,34 +36,31 @@
       @changeCookieOptions="updateCookieOptions"
     />
 
-    <div
-      :class="`player-container children-${this.numChildren}`"
-      v-if="playerID"
-    >
-      <PlayerInfo
-        v-if="displayOptions.showPlayerInfo"
-        :playerInfo="playerInfo"
-        :displayOptions="displayOptions"
-        :inMenu="false"
-        class=""
-      />
-      <PitchPlot
-        v-if="pitches"
-        :displayOptions="displayOptions"
-        :selectedPitch="selectedPitch"
-        :pitches="pitches"
-        @changeSelectedPitch="updateSelectedPitch"
-      />
-      <PitchList
-        v-if="pitches"
-        :displayOptions="displayOptions"
-        :selectedPitch="selectedPitch"
-        :sortBy="sortBy"
-        :pitches="pitches"
-        @changeSelectedPitch="updateSelectedPitch"
-        @changeSortBy="updateSortBy"
-      />
-    </div>
+    <PlayerInfo
+      v-if="displayOptions.showPlayerInfo"
+      :playerInfo="playerInfo"
+      :displayOptions="displayOptions"
+      :inMenu="false"
+      class=""
+    />
+
+    <PitchPlot
+      v-if="pitches"
+      :displayOptions="displayOptions"
+      :selectedPitch="selectedPitch"
+      :pitches="pitches"
+      @changeSelectedPitch="updateSelectedPitch"
+    />
+
+    <PitchList
+      v-if="pitches"
+      :displayOptions="displayOptions"
+      :selectedPitch="selectedPitch"
+      :sortBy="sortBy"
+      :pitches="pitches"
+      @changeSelectedPitch="updateSelectedPitch"
+      @changeSortBy="updateSortBy"
+    />
   </div>
 </template>
 <script>
@@ -114,7 +111,7 @@ export default {
   },
 
   updated: function () {
-    let numChildren = document.querySelector(".player-container");
+    let numChildren = document.querySelector(".player-page");
     this.numChildren = numChildren.children.length;
   },
 
@@ -128,8 +125,8 @@ export default {
     },
 
     checkNumChildren() {
-      let numChildren = document.querySelector(".player-container");
-      console.log(numChildren.children.length);
+      //let numChildren = document.querySelector(".player-container");
+      //console.log(numChildren.children.length);
     },
 
     updateSelectedPitch(el) {

@@ -20,31 +20,29 @@
     max-height: calc(100vh - 65px);
   }
 
-  .player-page .player-container {
-    grid-template-columns: 1fr minmax(25em, 30%);
-    grid-template-rows: 240px 1fr;
-    grid-template-areas: "playpitch-plot-container player-banner" "playpitch-plot-container pitch-list-container";
-    max-height: calc(100vh - 65px);
+  .player-page {
+    grid-template-columns: 1fr minmax(37.5em, 50em) minmax(18.75em, 31.25em) 1fr;
+    grid-template-rows: 4.0625em 15em 1fr;
+    grid-template-areas: "header header header header" ". playpitch-plot-container player-banner ." ". playpitch-plot-container pitch-list-container .";
   }
-  .player-page .player-container.children-2 {
-    grid-template-columns: 1fr minmax(25em, 30%);
-    grid-template-rows: 1fr;
-    grid-template-areas: "playpitch-plot-container pitch-list-container";
+  .player-page.children-3 {
+    grid-template-columns: 1fr minmax(37.5em, 50em) minmax(18.75em, 31.25em) 1fr;
+    grid-template-rows: 4.0625em 15em 1fr;
+    grid-template-areas: "header header header header" ". playpitch-plot-container pitch-list-container ." ". playpitch-plot-container pitch-list-container .";
   }
-  .player-page .player-container .player-banner {
+  .player-page .player-banner {
     border-left: 2px solid #333;
+    border-bottom: 2px solid #333;
   }
-  .player-page .player-container .pitch-plot-container {
+  .player-page .pitch-plot-container {
     border: 0;
   }
-  .player-page .player-container .pitch-list-container {
-    border-left: 2px solid #333;
-  }
-  .player-page .player-container header {
-    grid-area: header;
-  }
   .player-page .pitch-list-container {
+    border-left: 2px solid #333;
     max-height: initial;
+  }
+  .player-page header {
+    grid-area: header;
   }
 
   header nav.players,
@@ -68,5 +66,18 @@ header nav.info.active {
   .pitch-plot-container svg {
     width: 100%;
     height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media only screen and (min-width: 81.25em) {
+  .player-page .player-banner {
+    border-right: 2px solid #333;
+  }
+  .player-page .pitch-plot-container {
+    border-left: 2px solid #333;
+  }
+  .player-page .pitch-list-container {
+    border-right: 2px solid #333;
   }
 }

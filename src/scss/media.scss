@@ -28,39 +28,42 @@
   }
 
   .player-page {
-    .player-container {
-      grid-template-columns: 1fr minmax(em(400px), 30%);
-      grid-template-rows: 240px 1fr;
+    grid-template-columns:
+      1fr minmax(em(600px), em(800px)) minmax(em(300px), em(500px))
+      1fr;
+    grid-template-rows: em(65px) em(240px) 1fr;
+    grid-template-areas:
+      "header header header header"
+      ". playpitch-plot-container player-banner ."
+      ". playpitch-plot-container pitch-list-container .";
+
+    &.children-3 {
+      grid-template-columns:
+        1fr minmax(em(600px), em(800px)) minmax(em(300px), em(500px))
+        1fr;
+      grid-template-rows: em(65px) em(240px) 1fr;
       grid-template-areas:
-        "playpitch-plot-container player-banner"
-        "playpitch-plot-container pitch-list-container";
-      max-height: calc(100vh - 65px);
+        "header header header header"
+        ". playpitch-plot-container pitch-list-container ."
+        ". playpitch-plot-container pitch-list-container .";
+    }
 
-      &.children-2 {
-        grid-template-columns: 1fr minmax(em(400px), 30%);
-        grid-template-rows: 1fr;
-        grid-template-areas: "playpitch-plot-container pitch-list-container";
-      }
+    .player-banner {
+      border-left: 2px solid #333;
+      border-bottom: 2px solid #333;
+    }
 
-      .player-banner {
-        border-left: 2px solid #333;
-      }
-
-      .pitch-plot-container {
-        border: 0;
-      }
-
-      .pitch-list-container {
-        border-left: 2px solid #333;
-      }
-
-      header {
-        grid-area: header;
-      }
+    .pitch-plot-container {
+      border: 0;
     }
 
     .pitch-list-container {
+      border-left: 2px solid #333;
       max-height: initial;
+    }
+
+    header {
+      grid-area: header;
     }
   }
 
@@ -84,8 +87,26 @@
   .pitch-plot-container svg {
     width: 100%;
     height: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
-@media (hover: hover) {
+@media only screen and (min-width: em(1300px)) {
+  .player-page {
+    .player-banner {
+      border-right: 2px solid #333;
+    }
+
+    .pitch-plot-container {
+      border-left: 2px solid #333;
+    }
+
+    .pitch-list-container {
+      border-right: 2px solid #333;
+    }
+  }
+}
+
+@media only screen and (min-width: em(1024px)) and (hover: hover) {
 }
