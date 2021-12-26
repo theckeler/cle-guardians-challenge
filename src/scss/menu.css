@@ -1,4 +1,5 @@
 header {
+  background: #ce1126;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -23,6 +24,9 @@ header ul {
   margin: 0;
   list-style: none;
 }
+header .icons {
+  margin: 0 auto;
+}
 header .icons button {
   width: 3.4375em;
   height: 3.4375em;
@@ -36,9 +40,9 @@ header nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: #ce1126;
   width: 100%;
   padding: 0.625em;
+  background: #ce1126;
 }
 header nav.menu button {
   margin-right: 0.625em;
@@ -80,8 +84,8 @@ header nav.players, header nav.options, header nav.pitches, header nav.info {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  left: 0;
   width: 100%;
+  max-width: 48em;
   max-height: 60vh;
   background: rgba(255, 255, 255, 0.8);
   padding: 5em 1.25em 1.25em 1.25em;

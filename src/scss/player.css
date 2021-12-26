@@ -1,42 +1,31 @@
 .player-page {
-  overflow: hidden;
-  height: 100vh;
-  max-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   display: grid;
-  grid-template-columns: 100vw;
-  grid-template-rows: 65px 1fr;
-  grid-template-areas: "header" "player-container";
+  grid-template-rows: 65px 0 1fr 1fr;
+  grid-template-areas: "header" "player-banner" "playpitch-plot-container" "pitch-list-container";
+}
+.player-page.children-3 {
+  grid-template-rows: 65px 1fr 1fr;
+  grid-template-areas: "header" "playpitch-plot-container" "pitch-list-container";
 }
 .player-page header {
   grid-area: header;
+  border-bottom: 3px solid #333;
 }
-.player-page .player-container {
-  grid-area: player-container;
-  display: grid;
-  grid-template-columns: 100vw;
-  grid-template-rows: 0 1fr minmax(12.5em, 25em);
-  grid-template-areas: "player-banner" "playpitch-plot-container" "pitch-list-container";
-  gap: 0;
-}
-.player-page .player-container.children-2 {
-  grid-template-rows: 1fr minmax(12.5em, 25em);
-  grid-template-areas: "playpitch-plot-container" "pitch-list-container";
-}
-.player-page .player-container .player-banner {
+.player-page .player-banner {
   grid-area: player-banner;
-}
-.player-page .player-container .pitch-plot-container {
-  grid-area: playpitch-plot-container;
-}
-.player-page .player-container .pitch-list-container {
-  grid-area: pitch-list-container;
-}
-.player-page .player-container > * {
-  border-bottom: 2px solid #333;
-}
-.player-page .player-container > *:last-child {
-  border: 0;
-}
-.player-page .player-container .player-banner {
   overflow: hidden;
+}
+.player-page .pitch-plot-container {
+  grid-area: playpitch-plot-container;
+  border-bottom: 3px solid #333;
+}
+.player-page .pitch-list-container {
+  height: 100%;
+  max-height: 400px;
+  grid-area: pitch-list-container;
 }
