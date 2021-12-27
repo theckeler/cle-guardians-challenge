@@ -198,8 +198,13 @@ export default {
     },
 
     updatePlayer(newPlayer) {
+      this.loading = true;
       this.playerID = Number(newPlayer);
       document.cookie = `playerID=${Number(newPlayer)}`;
+      document.querySelectorAll("circle").forEach((el) => {
+        el.classList.add("active");
+        el.setAttribute("r", 0.12);
+      });
     },
 
     updatePitchMenu(pitchMenu) {
