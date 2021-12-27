@@ -1,3 +1,6 @@
+.pitch-plot-container {
+  overflow: hidden;
+}
 .pitch-plot-container svg {
   background: #fff;
   width: 100%;

@@ -1,6 +1,8 @@
 @import "functions";
 
 .pitch-plot-container {
+  overflow: hidden;
+
   svg {
     background: #fff;
     width: 100%;
