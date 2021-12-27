@@ -2,6 +2,7 @@
 
 .player-banner {
   display: flex;
+  flex-direction: column-reverse;
   background: rgb(185, 185, 185);
   position: relative;
   height: 100%;
