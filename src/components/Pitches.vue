@@ -60,10 +60,7 @@
 </template>
 
 <script>
-import { selectableMixin } from "../utility/selectable";
-
 export default {
-  mixins: [selectableMixin],
   props: {
     pitches: {
       type: Array,
