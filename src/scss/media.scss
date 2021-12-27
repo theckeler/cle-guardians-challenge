@@ -10,6 +10,15 @@
   h1 {
     font-size: rem(22px);
   }
+
+  header {
+    nav.players,
+    nav.options,
+    nav.pitches,
+    nav.info {
+      max-height: 50vh;
+    }
+  }
 }
 
 @media only screen and (min-width: em(1024px)) {
@@ -48,7 +57,7 @@
         ". playpitch-plot-container pitch-list-container .";
     }
 
-    .player-banner {
+    > .player-banner {
       border-left: 2px solid #333;
       border-bottom: 2px solid #333;
     }
@@ -67,23 +76,6 @@
     }
   }
 
-  header {
-    nav.players,
-    nav.options,
-    nav.pitches,
-    nav.info {
-      bottom: initial;
-      top: -100vh;
-      padding: 5em 1.25em 1.25em 1.25em;
-      transition: top 0.3s ease-in-out;
-
-      &.active {
-        bottom: initial;
-        top: 0;
-      }
-    }
-  }
-
   .pitch-plot-container svg {
     width: 100%;
     height: 100%;
@@ -94,7 +86,7 @@
 
 @media only screen and (min-width: em(1300px)) {
   .player-page {
-    .player-banner {
+    > .player-banner {
       border-right: 2px solid #333;
     }
 

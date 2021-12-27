@@ -4,6 +4,7 @@
   display: flex;
   background: #b9b9b9;
   position: relative;
+  height: 100%;
 }
 .player-banner .player-info {
   position: relative;
@@ -21,10 +22,15 @@
       -ms-flex-direction: row;
           flex-direction: row;
 }
+.player-banner .player-info .columns li {
+  padding: 0.1875em;
+}
 .player-banner .player-info h2 {
   font-size: 1em;
   padding: 0.375em 0.625em;
   background: rgba(0, 50, 99, 0.2);
+  margin-top: 1.25em;
+  margin-bottom: 0.625em;
 }
 .player-banner .player-img {
   position: relative;
