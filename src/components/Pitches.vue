@@ -28,33 +28,28 @@
         :stroke-width="0.02"
         fill-opacity="0"
       ></rect>
-      <template v-for="(p, i) in pitches">
-        <!-- <circle
-            :load="consoleOutput(p)"
-              :r="1.5 / 12"
-      /> -->
-        <circle
-          :key="'pitch-' + i"
-          :ref="'pitch-' + i"
-          :id="'pitch-' + i"
-          :cx="p.x"
-          :cy="scaleY(p.y)"
-          :r="1.5 / 12"
-          :fill="whatColor(p.pitchType)"
-          :class="[
-            'pitch-plot active',
-            p.pitchType.toLowerCase(),
-            {
-              visible: p.isVisible,
-            },
-            { selected: p.isSelected },
-          ]"
-          :index="i"
-          :pitchNum="p.pitchNum"
-          :fill-opacity="p.isSelected ? 1 : p.fillOpacity"
-          v-on:click="pitchSelect"
-        />
-      </template>
+      <circle
+        v-for="(p, i) in pitches"
+        :key="'pitch-' + i"
+        :ref="'pitch-' + i"
+        :id="'pitch-' + i"
+        :cx="p.x"
+        :cy="scaleY(p.y)"
+        :r="1.5 / 12"
+        :fill="whatColor(p.pitchType)"
+        :class="[
+          'pitch-plot active',
+          p.pitchType.toLowerCase(),
+          {
+            visible: p.isVisible,
+          },
+          { selected: p.isSelected },
+        ]"
+        :index="i"
+        :pitchNum="p.pitchNum"
+        :fill-opacity="p.isSelected ? 1 : p.fillOpacity"
+        v-on:click="pitchSelect"
+      />
     </svg>
   </div>
 </template>
