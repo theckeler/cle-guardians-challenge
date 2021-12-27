@@ -14,6 +14,13 @@ header nav.pitches,
 header nav.info {
     max-height: 50vh;
   }
+
+  .player-banner {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
 }
 @media only screen and (min-width: 64em) {
   header .info-button {
