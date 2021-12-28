@@ -75,99 +75,98 @@
           </button>
         </div>
       </nav>
-    </div>
 
-    <nav
-      class="main pitches"
-      v-if="pitchMenu"
-      v-bind:class="{ active: pitchMenuActive }"
-    >
-      <ul class="menu pitches">
-        <li v-for="(pitchShort, pitchName) in pitchMenu" :key="pitchShort">
-          <input
-            type="checkbox"
-            :id="pitchShort"
-            :name="pitchShort.toLowerCase()"
-            v-on:click="changePitchOptions"
-            v-on:keyup.enter="changePitchOptions"
-            checked
-          />
-          <label :for="pitchShort">{{ pitchName }}</label>
-        </li>
-      </ul>
-    </nav>
+      <nav
+        class="main pitches"
+        v-if="pitchMenu"
+        v-bind:class="{ active: pitchMenuActive }"
+      >
+        <ul class="menu pitches">
+          <li v-for="(pitchShort, pitchName) in pitchMenu" :key="pitchShort">
+            <input
+              type="checkbox"
+              :id="pitchShort"
+              :name="pitchShort.toLowerCase()"
+              v-on:click="changePitchOptions"
+              v-on:keyup.enter="changePitchOptions"
+              checked
+            />
+            <label :for="pitchShort">{{ pitchName }}</label>
+          </li>
+        </ul>
+      </nav>
 
-    <nav
-      class="main players"
-      v-if="players"
-      v-bind:class="{ active: playerMenuActive }"
-    >
-      <ul class="menu players">
-        <li
-          v-for="p in players"
-          :key="p.playerId"
-          v-bind:class="[p.playerId === playerID ? 'active' : '']"
-        >
-          <button
-            v-on:click="changePlayer"
-            v-on:keyup.enter="changePlayer"
-            :value="p.playerId"
+      <nav
+        class="main players"
+        v-if="players"
+        v-bind:class="{ active: playerMenuActive }"
+      >
+        <ul class="menu players">
+          <li
+            v-for="p in players"
+            :key="p.playerId"
+            v-bind:class="[p.playerId === playerID ? 'active' : '']"
           >
-            {{ p.fullName }}
-          </button>
-        </li>
-      </ul>
-    </nav>
+            <button
+              v-on:click="changePlayer"
+              v-on:keyup.enter="changePlayer"
+              :value="p.playerId"
+            >
+              {{ p.fullName }}
+            </button>
+          </li>
+        </ul>
+      </nav>
 
-    <nav class="main options" v-bind:class="{ active: mainMenuActive }">
-      <ul class="menu">
-        <li>
-          <input
-            type="checkbox"
-            id="showPlayerInfo"
-            name="changeOptions"
-            v-on:click="changeCookieOptions"
-            v-on:keyup.enter="changeCookieOptions"
-            :checked="displayOptions.showPlayerInfo"
-          />
-          <label for="showPlayerInfo">Player Panel</label>
-          <ul>
-            <li>
-              <input
-                type="checkbox"
-                id="showPhoto"
-                name="changeOptions"
-                v-on:click="changeCookieOptions"
-                v-on:keyup.enter="changeCookieOptions"
-                :checked="displayOptions.showPhoto"
-              />
-              <label for="showPhoto">Player Photo</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="showBio"
-                name="changeOptions"
-                v-on:click="changeCookieOptions"
-                v-on:keyup.enter="changeCookieOptions"
-                :checked="displayOptions.showBio"
-              />
-              <label for="showBio">Player Bio</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="showContractInfo"
-                name="changeOptions"
-                v-on:click="changeCookieOptions"
-                v-on:keyup.enter="changeCookieOptions"
-                :checked="displayOptions.showContractInfo"
-              />
-              <label for="showContractInfo">Player Contract Info</label>
-            </li>
-          </ul>
-        </li>
-        <!-- <li>
+      <nav class="main options" v-bind:class="{ active: mainMenuActive }">
+        <ul class="menu">
+          <li>
+            <input
+              type="checkbox"
+              id="showPlayerInfo"
+              name="changeOptions"
+              v-on:click="changeCookieOptions"
+              v-on:keyup.enter="changeCookieOptions"
+              :checked="displayOptions.showPlayerInfo"
+            />
+            <label for="showPlayerInfo">Player Panel</label>
+            <ul>
+              <li>
+                <input
+                  type="checkbox"
+                  id="showPhoto"
+                  name="changeOptions"
+                  v-on:click="changeCookieOptions"
+                  v-on:keyup.enter="changeCookieOptions"
+                  :checked="displayOptions.showPhoto"
+                />
+                <label for="showPhoto">Player Photo</label>
+              </li>
+              <li>
+                <input
+                  type="checkbox"
+                  id="showBio"
+                  name="changeOptions"
+                  v-on:click="changeCookieOptions"
+                  v-on:keyup.enter="changeCookieOptions"
+                  :checked="displayOptions.showBio"
+                />
+                <label for="showBio">Player Bio</label>
+              </li>
+              <li>
+                <input
+                  type="checkbox"
+                  id="showContractInfo"
+                  name="changeOptions"
+                  v-on:click="changeCookieOptions"
+                  v-on:keyup.enter="changeCookieOptions"
+                  :checked="displayOptions.showContractInfo"
+                />
+                <label for="showContractInfo">Player Contract Info</label>
+              </li>
+            </ul>
+          </li>
+          <!-- <li>
           <input
             type="checkbox"
             id="showPitches"
@@ -178,18 +177,18 @@
           />
           <label for="showPitches">Player Pitches</label>
         </li> -->
-      </ul>
-    </nav>
+        </ul>
+      </nav>
 
-    <nav class="main info" v-bind:class="{ active: infoMenuActive }">
-      <PlayerInfo
-        :playerInfo="playerInfo"
-        :displayOptions="displayOptions"
-        :inMenu="true"
-        class=""
-      />
-    </nav>
-
+      <nav class="main info" v-bind:class="{ active: infoMenuActive }">
+        <PlayerInfo
+          :playerInfo="playerInfo"
+          :displayOptions="displayOptions"
+          :inMenu="true"
+          class=""
+        />
+      </nav>
+    </div>
     <div class="loading" v-on:click="closeMenus"></div>
   </header>
 </template>

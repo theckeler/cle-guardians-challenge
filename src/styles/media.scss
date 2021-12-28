@@ -20,6 +20,10 @@
 
   .player-banner {
     flex-direction: row;
+
+    .player-info {
+      border-right: 1px solid #333;
+    }
   }
 }
 
