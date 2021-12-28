@@ -60,6 +60,6 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "../scss/player-info.min.css";
+<style lang="scss">
+@import "../styles/player-info.scss";
 </style>

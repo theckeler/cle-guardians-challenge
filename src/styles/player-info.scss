@@ -1,9 +1,9 @@
-@import "functions";
-
 .player-banner {
   display: flex;
+  flex-direction: column-reverse;
   background: rgb(185, 185, 185);
   position: relative;
+  height: 100%;
 
   .player-info {
     position: relative;
@@ -16,12 +16,18 @@
 
     .columns {
       flex-direction: row;
+
+      li {
+        padding: em(3px);
+      }
     }
 
     h2 {
       font-size: em(16px);
       padding: em(6px) em(10px);
       background: rgba(#003263, 0.2);
+      margin-top: em(20px);
+      margin-bottom: em(10px);
     }
   }
 

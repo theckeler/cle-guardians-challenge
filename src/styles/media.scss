@@ -1,0 +1,106 @@
+@media only screen and (min-width: em(414px)) {
+  h1 {
+    font-size: rem(18px);
+  }
+}
+
+@media only screen and (min-width: em(768px)) {
+  h1 {
+    font-size: rem(22px);
+  }
+
+  header {
+    nav.players,
+    nav.options,
+    nav.pitches,
+    nav.info {
+      max-height: 50vh;
+    }
+  }
+
+  .player-banner {
+    flex-direction: row;
+  }
+}
+
+@media only screen and (min-width: em(1024px)) {
+  header {
+    .info-button {
+      display: none;
+    }
+
+    .main-button {
+      display: block;
+    }
+  }
+
+  .pitch-plot-container svg {
+    max-height: calc(100vh - 65px);
+  }
+
+  .player-page {
+    grid-template-columns:
+      1fr minmax(em(600px), em(800px)) minmax(em(300px), em(500px))
+      1fr;
+    grid-template-rows: em(65px) em(240px) 1fr;
+    grid-template-areas:
+      "header header header header"
+      ". playpitch-plot-container player-banner ."
+      ". playpitch-plot-container pitch-list-container .";
+
+    &.children-3 {
+      grid-template-columns:
+        1fr minmax(em(600px), em(800px)) minmax(em(300px), em(500px))
+        1fr;
+      grid-template-rows: em(65px) em(240px) 1fr;
+      grid-template-areas:
+        "header header header header"
+        ". playpitch-plot-container pitch-list-container ."
+        ". playpitch-plot-container pitch-list-container .";
+    }
+
+    > .player-banner {
+      border-left: 2px solid #333;
+      border-bottom: 2px solid #333;
+    }
+
+    .pitch-plot-container {
+      border: 0;
+    }
+
+    .pitch-list-container {
+      border-left: 2px solid #333;
+      max-height: initial;
+    }
+
+    header {
+      grid-area: header;
+    }
+  }
+
+  .pitch-plot-container svg {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (min-width: em(1300px)) {
+  .player-page {
+    > .player-banner {
+      border-right: 2px solid #333;
+    }
+
+    .pitch-plot-container {
+      border-left: 2px solid #333;
+    }
+
+    .pitch-list-container {
+      border-right: 2px solid #333;
+    }
+  }
+}
+
+@media only screen and (min-width: em(1024px)) and (hover: hover) {
+}

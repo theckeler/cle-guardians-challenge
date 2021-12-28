@@ -1,5 +1,3 @@
-@import "functions";
-
 html,
 body {
   padding: 0;
@@ -9,8 +7,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background: #fff;
   min-height: -webkit-fill-available;
-  height: 100vh;
-  max-height: 100%;
+  // color: $cleBlue;
 
   &.active {
     overflow: hidden;
@@ -75,7 +72,6 @@ h2 {
 
 .columns {
   display: flex;
-  align-items: flex-end;
   flex-wrap: wrap;
   list-style: none;
   padding: 0;

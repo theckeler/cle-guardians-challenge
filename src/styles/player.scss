@@ -1,0 +1,43 @@
+.player-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: em(65px) 0 1fr 1fr;
+  grid-template-areas:
+    "header"
+    "player-banner"
+    "playpitch-plot-container"
+    "pitch-list-container";
+
+  &.children-3 {
+    grid-template-rows: em(65px) 1fr 1fr;
+    grid-template-areas:
+      "header"
+      "playpitch-plot-container"
+      "pitch-list-container";
+  }
+
+  header {
+    grid-area: header;
+    border-bottom: 3px solid #333;
+  }
+
+  .player-banner {
+    grid-area: player-banner;
+    overflow: hidden;
+  }
+
+  .pitch-plot-container {
+    grid-area: playpitch-plot-container;
+    border-bottom: 3px solid #333;
+  }
+
+  .pitch-list-container {
+    height: 100%;
+    max-height: 50vh;
+    grid-area: pitch-list-container;
+  }
+}

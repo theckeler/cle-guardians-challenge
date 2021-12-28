@@ -1,5 +1,5 @@
 <template>
-  <div class="player-page">
+  <div class="player-page" :class="`children-${this.numChildren}`">
     <div v-if="loading" class="loading">
       <div class="logo">
         <svg
@@ -36,39 +36,36 @@
       @changeCookieOptions="updateCookieOptions"
     />
 
-    <div
-      :class="`player-container children-${this.numChildren}`"
-      v-if="playerID"
-    >
-      <PlayerInfo
-        v-if="displayOptions.showPlayerInfo"
-        :playerInfo="playerInfo"
-        :displayOptions="displayOptions"
-        :inMenu="false"
-        class=""
-      />
-      <PitchPlot
-        v-if="pitches"
-        :displayOptions="displayOptions"
-        :selectedPitch="selectedPitch"
-        :pitches="pitches"
-        @changeSelectedPitch="updateSelectedPitch"
-      />
-      <PitchList
-        v-if="pitches"
-        :displayOptions="displayOptions"
-        :selectedPitch="selectedPitch"
-        :sortBy="sortBy"
-        :pitches="pitches"
-        @changeSelectedPitch="updateSelectedPitch"
-        @changeSortBy="updateSortBy"
-      />
-    </div>
+    <PlayerInfo
+      v-if="displayOptions.showPlayerInfo"
+      :playerInfo="playerInfo"
+      :displayOptions="displayOptions"
+      :inMenu="false"
+      class=""
+    />
+
+    <PitchPlot
+      v-if="pitches"
+      :displayOptions="displayOptions"
+      :selectedPitch="selectedPitch"
+      :pitches="pitches"
+      @changeSelectedPitch="updateSelectedPitch"
+    />
+
+    <PitchList
+      v-if="pitches"
+      :displayOptions="displayOptions"
+      :selectedPitch="selectedPitch"
+      :sortBy="sortBy"
+      :pitches="pitches"
+      @changeSelectedPitch="updateSelectedPitch"
+      @changeSortBy="updateSortBy"
+    />
   </div>
 </template>
 <script>
 import PlayerInfo from "./PlayerInfo.vue";
-import PitchPlot from "./Pitches.vue";
+import PitchPlot from "./PitchPlot.vue";
 import PitchList from "./PitchList.vue";
 import Menu from "./Menu.vue";
 
@@ -114,7 +111,7 @@ export default {
   },
 
   updated: function () {
-    let numChildren = document.querySelector(".player-container");
+    let numChildren = document.querySelector(".player-page");
     this.numChildren = numChildren.children.length;
   },
 
@@ -128,8 +125,8 @@ export default {
     },
 
     checkNumChildren() {
-      let numChildren = document.querySelector(".player-container");
-      console.log(numChildren.children.length);
+      //let numChildren = document.querySelector(".player-container");
+      //console.log(numChildren.children.length);
     },
 
     updateSelectedPitch(el) {
@@ -201,8 +198,13 @@ export default {
     },
 
     updatePlayer(newPlayer) {
+      this.loading = true;
       this.playerID = Number(newPlayer);
       document.cookie = `playerID=${Number(newPlayer)}`;
+      document.querySelectorAll("circle").forEach((el) => {
+        el.classList.add("active");
+        el.setAttribute("r", 0.12);
+      });
     },
 
     updatePitchMenu(pitchMenu) {
@@ -236,6 +238,6 @@ export default {
   },
 };
 </script>
-<style lang="css" scoped>
-@import "../scss/player.min.css";
+<style lang="scss">
+@import "../styles/player.scss";
 </style>
