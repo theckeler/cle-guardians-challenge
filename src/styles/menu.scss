@@ -12,7 +12,7 @@ header {
     max-height: em(42px);
 
     svg {
-      width: auto;
+      width: 100%;
       height: 100%;
       display: block;
     }
@@ -47,11 +47,8 @@ header {
     width: 100%;
     padding: em(10px);
     background: #ce1126;
-    // max-width: em(1300px);
 
     &.menu {
-      // z-index: 2002;
-
       button {
         margin-right: em(10px);
         background: #fff;
