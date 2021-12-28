@@ -91,7 +91,6 @@ header {
       justify-content: flex-start;
       width: 100%;
       max-width: em(768px);
-      //height: 100%;
       max-height: 60vh;
       background: rgba(#fff, 0.8);
       padding: em(12px);
@@ -165,6 +164,52 @@ header {
 
       ul ul {
         margin-top: em(10px);
+      }
+    }
+
+    &.pitches {
+      li {
+        &.all {
+          input[type="checkbox"]:checked + label {
+            background: black;
+          }
+        }
+
+        &.sn {
+          input[type="checkbox"]:checked + label {
+            background: #ff7f0e;
+          }
+        }
+
+        &.ch {
+          input[type="checkbox"]:checked + label {
+            background: #1f77b4;
+          }
+        }
+
+        &.ct {
+          input[type="checkbox"]:checked + label {
+            background: #8c564b;
+          }
+        }
+
+        &.sl {
+          input[type="checkbox"]:checked + label {
+            background: #e377c2;
+          }
+        }
+
+        &.fb {
+          input[type="checkbox"]:checked + label {
+            background: #d62728;
+          }
+        }
+
+        &.cb {
+          input[type="checkbox"]:checked + label {
+            background: #9467bd;
+          }
+        }
       }
     }
 

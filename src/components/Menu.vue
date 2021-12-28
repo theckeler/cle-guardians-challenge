@@ -82,7 +82,11 @@
         v-bind:class="{ active: pitchMenuActive }"
       >
         <ul class="menu pitches">
-          <li v-for="(pitchShort, pitchName) in pitchMenu" :key="pitchShort">
+          <li
+            v-for="(pitchShort, pitchName) in pitchMenu"
+            :key="pitchShort"
+            :class="pitchShort.toLowerCase()"
+          >
             <input
               type="checkbox"
               :id="pitchShort"
@@ -228,6 +232,12 @@ export default {
 
   methods: {
     changePitchOptions(e) {
+      //console.log(e);
+
+      //       document.querySelectorAll('div').forEach(function(el) {
+      //   el.style.color = "orange";
+      // })
+
       let selected = document.querySelectorAll(".selected");
       if (selected.length) {
         selected.forEach((check) => {
