@@ -35,14 +35,14 @@
   }
 
   .pitch-plot-container svg {
-    max-height: calc(100vh - 65px);
+    max-height: 100%;
   }
 
   .player-page {
     grid-template-columns:
       1fr minmax(em(600px), em(800px)) minmax(em(300px), em(500px))
       1fr;
-    grid-template-rows: em(65px) em(240px) 1fr;
+    grid-template-rows: em(70px) em(240px) 1fr;
     grid-template-areas:
       "header header header header"
       ". playpitch-plot-container player-banner ."
@@ -52,7 +52,7 @@
       grid-template-columns:
         1fr minmax(em(600px), em(800px)) minmax(em(300px), em(500px))
         1fr;
-      grid-template-rows: em(65px) em(240px) 1fr;
+      grid-template-rows: em(70px) em(240px) 1fr;
       grid-template-areas:
         "header header header header"
         ". playpitch-plot-container pitch-list-container ."
