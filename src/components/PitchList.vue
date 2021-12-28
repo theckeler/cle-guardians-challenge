@@ -39,7 +39,7 @@
         </ul>
 
         <ul>
-          <li>
+          <li class="center">
             {{
               pitchResult(p.balls, p.strikes, p.swing, p.miss, p.inStrikeZone)
             }}
