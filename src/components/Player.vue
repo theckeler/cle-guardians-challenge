@@ -65,7 +65,7 @@
 </template>
 <script>
 import PlayerInfo from "./PlayerInfo.vue";
-import PitchPlot from "./Pitches.vue";
+import PitchPlot from "./PitchPlot.vue";
 import PitchList from "./PitchList.vue";
 import Menu from "./Menu.vue";
 
@@ -238,6 +238,6 @@ export default {
   },
 };
 </script>
-<style lang="css" scoped>
-@import "../scss/player.min.css";
+<style lang="scss">
+@import "../styles/player.scss";
 </style>

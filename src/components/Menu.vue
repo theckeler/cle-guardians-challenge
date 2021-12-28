@@ -314,6 +314,6 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "../scss/menu.min.css";
+<style lang="scss">
+@import "../styles/menu.scss";
 </style>

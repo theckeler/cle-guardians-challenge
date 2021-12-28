@@ -1,12 +1,10 @@
-@import "functions";
-
 .pitch-plot-container {
   overflow: hidden;
 
   svg {
     background: #fff;
     width: 100%;
-    height: auto;
+    height: 100%;
     max-height: 60vh;
 
     circle {

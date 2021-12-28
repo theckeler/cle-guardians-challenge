@@ -55,10 +55,7 @@
 </template>
 
 <script>
-import { selectableMixin } from "../utility/selectable";
-
 export default {
-  mixins: [selectableMixin],
   props: {
     pitches: {
       type: Array,
@@ -148,6 +145,6 @@ export default {
 };
 </script>
 
-<style scoped lang="css">
-@import "../scss/pitches.min.css";
+<style lang="scss">
+@import "../styles/pitch-plot.scss";
 </style>

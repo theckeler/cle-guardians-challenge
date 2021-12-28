@@ -1,5 +1,3 @@
-@import "functions";
-
 .pitch-list-container {
   overflow-y: auto;
   scroll-behavior: smooth;
@@ -37,6 +35,7 @@
 
       ul {
         padding: em(10px);
+
         li {
           padding: em(2px) em(4px);
         }
