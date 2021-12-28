@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="wrapper">
-      <nav class="menu icons">
+      <nav class="menu icons" aria-label="primary">
         <div class="logo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -80,6 +80,7 @@
         class="main pitches"
         v-if="pitchMenu"
         v-bind:class="{ active: pitchMenuActive }"
+        aria-label="pitches"
       >
         <ul class="menu pitches">
           <li
@@ -104,6 +105,7 @@
         class="main players"
         v-if="players"
         v-bind:class="{ active: playerMenuActive }"
+        aria-label="players"
       >
         <ul class="menu players">
           <li
@@ -122,7 +124,11 @@
         </ul>
       </nav>
 
-      <nav class="main options" v-bind:class="{ active: mainMenuActive }">
+      <nav
+        class="main options"
+        v-bind:class="{ active: mainMenuActive }"
+        aria-label="options"
+      >
         <ul class="menu">
           <li>
             <input
@@ -170,21 +176,14 @@
               </li>
             </ul>
           </li>
-          <!-- <li>
-          <input
-            type="checkbox"
-            id="showPitches"
-            name="changeOptions"
-            v-on:click="changeCookieOptions"
-            v-on:keyup.enter="changeCookieOptions"
-            :checked="displayOptions.showPitches"
-          />
-          <label for="showPitches">Player Pitches</label>
-        </li> -->
         </ul>
       </nav>
 
-      <nav class="main info" v-bind:class="{ active: infoMenuActive }">
+      <nav
+        class="main info"
+        v-bind:class="{ active: infoMenuActive }"
+        aria-label="player-info"
+      >
         <PlayerInfo
           :playerInfo="playerInfo"
           :displayOptions="displayOptions"
@@ -193,6 +192,7 @@
         />
       </nav>
     </div>
+
     <div class="loading" v-on:click="closeMenus"></div>
   </header>
 </template>
@@ -296,7 +296,7 @@ export default {
       options.forEach((option) => {
         cookie[option.id] = option.checked;
       });
-      document.cookie = `displayOptions=${JSON.stringify(cookie)}`;
+      document.cookie = `displayOptions=${JSON.stringify(cookie)};`;
       this.$emit("changeCookieOptions");
     },
 
