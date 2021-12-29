@@ -159,6 +159,13 @@ export default {
           check.classList.remove("selected");
         });
       }
+
+      console.log(
+        "height",
+        document.querySelector(".pitch-list-container").offsetHeight
+      );
+      console.log("scrollToThis", scrollToThis.offsetTop);
+
       document.querySelector(".pitch-list-container").scrollTop =
         scrollToThis.offsetTop;
       scrollToThis.classList.add("selected");

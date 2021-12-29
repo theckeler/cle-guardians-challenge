@@ -33,9 +33,9 @@
           <li>Bat Approach:</li>
           <li>{{ p.batApproachGroup }}</li>
           <li>Cut:</li>
-          <li>{{ p.cut }}</li>
+          <li>{{ p.cut.toFixed(2) }}</li>
           <li>Rise:</li>
-          <li>{{ p.rise }}</li>
+          <li>{{ p.rise.toFixed(2) }}</li>
         </ul>
 
         <ul>
