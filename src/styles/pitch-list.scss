@@ -100,7 +100,7 @@
       }
 
       ul {
-        padding: em(12px) em(14px);
+        padding: em(12px) em(20px);
 
         li {
           padding: em(2px) em(4px);
@@ -128,6 +128,7 @@
 
         &:before {
           opacity: 1;
+          width: em(14px);
         }
       }
     }
