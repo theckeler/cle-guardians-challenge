@@ -18,7 +18,7 @@
         <div class="buttons">
           <h1>{{ playerInfo.fullName }}</h1>
           <button
-            v-if="playerID"
+            v-if="playerId"
             v-on:click="openMenu('mainMenu')"
             v-on:keyup.enter="openMenu('mainMenu')"
             class="main-button"
@@ -60,7 +60,7 @@
           </button>
 
           <button
-            v-if="playerID"
+            v-if="playerId"
             v-on:click="openMenu('playerMenu')"
             v-on:keyup.enter="openMenu('playerMenu')"
             class="player-button"
@@ -111,7 +111,7 @@
           <li
             v-for="p in players"
             :key="p.playerId"
-            v-bind:class="[p.playerId === playerID ? 'active' : '']"
+            v-bind:class="[p.playerId === playerId ? 'active' : '']"
           >
             <button
               v-on:click="changePlayer"
@@ -216,7 +216,7 @@ export default {
   },
 
   props: {
-    playerID: {
+    playerId: {
       type: Number,
     },
     displayOptions: {
@@ -228,16 +228,11 @@ export default {
     playerInfo: {
       type: Object,
     },
+    updateURL: { type: Function },
   },
 
   methods: {
     changePitchOptions(e) {
-      //console.log(e);
-
-      //       document.querySelectorAll('div').forEach(function(el) {
-      //   el.style.color = "orange";
-      // })
-
       let selected = document.querySelectorAll(".selected");
       if (selected.length) {
         selected.forEach((check) => {
@@ -256,6 +251,9 @@ export default {
           el.setAttribute("r", 0);
         });
       }
+
+      this.$emit("updateURL");
+      this.$emit("resetSelectedPitch");
     },
 
     openMenu(whatMenu) {

@@ -1,9 +1,5 @@
 <template>
-  <div
-    ref="container"
-    class="pitch-list-container"
-    v-if="displayOptions.showPitches"
-  >
+  <div ref="container" class="pitch-list-container">
     <!-- <div class="sort-by">
       <select @change="changeSortBy">
         <option value="gameDate">Game Date</option>
@@ -33,9 +29,9 @@
           <li>Bat Approach:</li>
           <li>{{ p.batApproachGroup }}</li>
           <li>Cut:</li>
-          <li>{{ p.cut.toFixed(2) }}</li>
+          <li>{{ p.cut ? p.cut.toFixed(2) : "" }}</li>
           <li>Rise:</li>
-          <li>{{ p.rise.toFixed(2) }}</li>
+          <li>{{ p.rise ? p.rise.toFixed(2) : "" }}</li>
         </ul>
 
         <ul>
@@ -143,7 +139,7 @@ export default {
     },
 
     pitchSelect(el) {
-      this.$emit("changeSelectedPitch", el);
+      this.$emit("changeSelectedPitch", el.target.attributes.index.value);
     },
 
     consoleOutput(el) {

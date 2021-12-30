@@ -134,7 +134,7 @@ export default {
 
     pitchSelect(el) {
       if (el.target.classList.contains("active")) {
-        this.$emit("changeSelectedPitch", el);
+        this.$emit("changeSelectedPitch", el.target.attributes.index.value);
       }
     },
 

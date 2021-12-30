@@ -28,12 +28,14 @@
     </div>
 
     <Menu
-      :playerID="playerID"
+      :playerId="playerId"
       :displayOptions="displayOptions"
       :pitchMenu="pitchMenu"
       :playerInfo="playerInfo"
       @changePlayer="updatePlayer"
       @changeCookieOptions="updateCookieOptions"
+      @updateURL="updateURL"
+      @resetSelectedPitch="resetSelectedPitch"
     />
 
     <PlayerInfo
@@ -52,15 +54,7 @@
       @changeSelectedPitch="updateSelectedPitch"
     />
 
-    <PitchList
-      v-if="pitches"
-      :displayOptions="displayOptions"
-      :selectedPitch="selectedPitch"
-      :sortBy="sortBy"
-      :pitches="pitches"
-      @changeSelectedPitch="updateSelectedPitch"
-      @changeSortBy="updateSortBy"
-    />
+    <PitchList :pitches="pitches" @changeSelectedPitch="updateSelectedPitch" />
   </div>
 </template>
 <script>
@@ -86,7 +80,7 @@ export default {
       selectedPitch: null,
       numChildren: null,
       sortBy: "gameDate",
-      playerID: 105859,
+      playerId: 105859,
       pitchMenu: {},
       displayOptions: {
         showPlayerInfo: true,
@@ -95,18 +89,38 @@ export default {
         showContractInfo: true,
         showPitches: true,
       },
+      params: null,
     };
   },
 
   props: {},
 
   created() {
+    const paramsString = window.location.search.substring(1);
+    if (paramsString) {
+      let searchParams = new URLSearchParams(paramsString);
+      if (Number(searchParams.get("playerId") > 0)) {
+        this.playerId = Number(searchParams.get("playerId"));
+        document.cookie = `playerId=${this.playerId}`;
+      }
+
+      if (Number(searchParams.get("selectedPitch")) >= 0) {
+        this.selectedPitch = Number(searchParams.get("selectedPitch"));
+      }
+
+      this.params = paramsString;
+    }
+
     this.updateCookies();
+
+    this.fetchData();
+    this.updateURL();
   },
 
   watch: {
-    playerID: function () {
+    playerId: function () {
       this.fetchData();
+      this.updateURL();
     },
   },
 
@@ -115,22 +129,31 @@ export default {
     this.numChildren = numChildren.children.length;
   },
 
-  mounted() {
-    this.fetchData();
-  },
-
   methods: {
+    resetSelectedPitch() {
+      this.selectedPitch = null;
+      this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
+    },
+
     updateSortBy(reSort) {
       this.sortBy = reSort.target.value;
     },
 
-    checkNumChildren() {
-      //let numChildren = document.querySelector(".player-container");
-      //console.log(numChildren.children.length);
+    updateURL() {
+      let params = new URLSearchParams(location.search);
+      if (this.playerId > 0) {
+        params.set("playerId", this.playerId);
+      }
+
+      if (this.selectedPitch >= 0) {
+        params.set("selectedPitch", this.selectedPitch);
+      }
+      window.history.replaceState({}, "", `${location.pathname}?${params}`);
     },
 
     updateSelectedPitch(el) {
-      this.selectedPitch = Number(el.target.attributes.index.value);
+      this.selectedPitch = Number(el);
+      this.updateURL();
 
       let selected = document.querySelectorAll(".selected");
       let pitchPlotEl = document.querySelector(
@@ -160,58 +183,81 @@ export default {
         });
       }
 
-      console.log(
-        "height",
-        document.querySelector(".pitch-list-container").offsetHeight
-      );
-      console.log("scrollToThis", scrollToThis.offsetTop);
-
       document.querySelector(".pitch-list-container").scrollTop =
         scrollToThis.offsetTop;
       scrollToThis.classList.add("selected");
+
+      this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
     },
 
-    fetchData() {
-      let fetchURL =
+    async runFetch(url) {
+      const data = await fetch(url, {
+        method: "get",
+      }).then((r) => r.json());
+
+      return { data };
+    },
+
+    updatetitle(player, pitch) {
+      document.title = `${player ? player + " ›" : ""} ${
+        pitch ? "Pitch #" + this.pitches[pitch].pitchNum + " ›" : ""
+      }  Pitcher Assessment`;
+    },
+
+    async fetchData() {
+      const playerInfo = await this.runFetch(
         "https://cle-endpoints.consumedesign.com/api/players?playerId=" +
-        this.playerID;
-      fetch(fetchURL)
-        .then((res) => res.json())
-        .then((data) => {
-          this.playerInfo = data.playerDetail;
-        });
+          this.playerId
+      );
+      if (playerInfo.data.playerDetail) {
+        this.playerInfo = playerInfo.data.playerDetail;
+      }
 
-      fetchURL =
+      const playerPitches = await this.runFetch(
         "https://cle-endpoints.consumedesign.com/api/pitches?playerId=" +
-        this.playerID;
-      fetch(fetchURL)
-        .then((res) => res.json())
-        .then((data) => {
-          this.pitches = data.pitches.sort((a, b) =>
-            a[this.sortBy] > b[this.sortBy] ? 1 : -1
-          );
+          this.playerId
+      );
 
-          const pitchMenu = {};
-          this.pitches.forEach((p) => {
-            pitchMenu[p.pitchName] = p.pitchType;
-          });
-          this.pitchMenu = pitchMenu;
+      if (playerPitches.data.pitches) {
+        this.pitches = playerPitches.data.pitches.sort((a, b) =>
+          a[this.sortBy] > b[this.sortBy] ? 1 : -1
+        );
 
-          setTimeout(() => {
-            document.querySelector("body").classList.remove("active");
-            this.loading = false;
-          }, 1000);
+        const pitchMenu = {};
+        this.pitches.forEach((p) => {
+          pitchMenu[p.pitchName] = p.pitchType;
         });
+        this.pitchMenu = pitchMenu;
+
+        setTimeout(() => {
+          if (
+            this.selectedPitch >= 0 &&
+            document.querySelector(
+              `.pitch-plot-container circle[index="${this.selectedPitch}"]`
+            )
+          ) {
+            this.updateSelectedPitch(this.selectedPitch);
+          }
+
+          document.querySelector("body").classList.remove("active");
+          this.loading = false;
+        }, 1000);
+      }
+
+      this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
     },
 
     updatePlayer(newPlayer) {
       this.loading = true;
-      this.playerID = Number(newPlayer);
-      document.cookie = `playerID=${Number(newPlayer)}`;
+      this.playerId = Number(newPlayer);
+      document.cookie = `playerId=${Number(newPlayer)}`;
       document.querySelectorAll("circle").forEach((el) => {
         el.classList.add("active");
         el.setAttribute("r", 0.12);
       });
+
+      this.selectedPitch = null;
+      this.updateURL();
     },
 
     updatePitchMenu(pitchMenu) {
