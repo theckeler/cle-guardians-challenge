@@ -10,6 +10,10 @@
     }
   }
 
+  li {
+    list-style: none;
+  }
+
   > ul {
     display: flex;
     flex-direction: column;
@@ -96,7 +100,7 @@
       }
 
       ul {
-        padding: em(10px);
+        padding: em(12px) em(14px);
 
         li {
           padding: em(2px) em(4px);
@@ -119,6 +123,9 @@
       }
 
       &.selected {
+        background: #f8f8f8;
+        box-shadow: inset 0 0 em(5px) em(5px) rgba(#000, 0.1);
+
         &:before {
           opacity: 1;
         }
