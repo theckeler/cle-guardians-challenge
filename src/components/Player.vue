@@ -129,10 +129,35 @@ export default {
     this.numChildren = numChildren.children.length;
   },
 
+  mounted() {
+    window.addEventListener("resize", () => {
+      this.resetSelectedPitch();
+    });
+  },
+
   methods: {
     resetSelectedPitch() {
       this.selectedPitch = null;
+      this.resetAllSelected();
+      this.updateURL();
       this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
+      document.querySelector(".pitch-list-container").scrollTop = 0;
+    },
+
+    resetAllSelected() {
+      let selected = document.querySelectorAll(".selected");
+      if (selected.length) {
+        selected.forEach((check) => {
+          check.classList.remove("selected");
+        });
+      }
+
+      selected = document.querySelectorAll(".pitch-list-container li");
+      if (selected.length) {
+        selected.forEach((check) => {
+          check.classList.remove("selected");
+        });
+      }
     },
 
     updateSortBy(reSort) {
@@ -155,39 +180,30 @@ export default {
       this.selectedPitch = Number(el);
       this.updateURL();
 
-      let selected = document.querySelectorAll(".selected");
       let pitchPlotEl = document.querySelector(
         `.pitch-plot-container circle[index="${this.selectedPitch}"]`
       );
       let parentEl = document.querySelector(".pitch-plot-container svg");
 
-      if (selected.length) {
-        selected.forEach((check) => {
-          check.classList.remove("selected"); // REMOVE ALL .selected
-        });
-      }
-      pitchPlotEl.classList.add("selected"); // ADD .selected
+      this.resetAllSelected();
 
-      // Move to the top .selected
-      parentEl.removeChild(pitchPlotEl);
-      parentEl.appendChild(pitchPlotEl);
-
-      // Scoll .pitch-list-container
       const scrollToThis = document.querySelector(
         `#pitch-list-${this.selectedPitch}`
       );
-      selected = document.querySelectorAll(".pitch-list-container li");
-      if (selected.length) {
-        selected.forEach((check) => {
-          check.classList.remove("selected");
-        });
-      }
-
-      document.querySelector(".pitch-list-container").scrollTop =
-        scrollToThis.offsetTop;
+      pitchPlotEl.classList.add("selected");
+      parentEl.removeChild(pitchPlotEl);
+      parentEl.appendChild(pitchPlotEl);
+      this.scrollTo(scrollToThis);
       scrollToThis.classList.add("selected");
-
       this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
+    },
+
+    scrollTo(scrollToThis) {
+      let containerHeight =
+        document.querySelector(".pitch-list-container").clientHeight / 2;
+      let thisHeight = scrollToThis.clientHeight / 2;
+      document.querySelector(".pitch-list-container").scrollTop =
+        scrollToThis.offsetTop - (containerHeight - thisHeight);
     },
 
     async runFetch(url) {
