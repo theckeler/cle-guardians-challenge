@@ -1,5 +1,8 @@
 header {
   background: #ce1126;
+  box-shadow: 0 0 em(12px) #000;
+  position: relative;
+  z-index: 4001;
 
   .main-button {
     display: none;
@@ -92,14 +95,13 @@ header {
       width: 100%;
       max-width: em(768px);
       max-height: 60vh;
-      background: rgba(#fff, 0.8);
+      background: rgba(#fff, 1);
       padding: em(12px);
       overflow-y: auto;
       transition: top 0.3s ease-in-out;
 
       &.active {
         top: em(70px);
-        // box-shadow: 0 0 20px #000;
       }
 
       li {
@@ -231,7 +233,7 @@ header {
 
     &.active {
       max-height: 1000vh;
-      opacity: 0.5;
+      opacity: 0.9;
     }
   }
 }

@@ -111,12 +111,13 @@
           <li
             v-for="p in players"
             :key="p.playerId"
-            v-bind:class="[p.playerId === playerId ? 'active' : '']"
+            v-bind:class="[p.playerId === this.playerId ? 'active' : '']"
           >
             <button
               v-on:click="changePlayer"
               v-on:keyup.enter="changePlayer"
               :value="p.playerId"
+              :disabled="(p.playerId === this.playerId) === true"
             >
               {{ p.fullName }}
             </button>
