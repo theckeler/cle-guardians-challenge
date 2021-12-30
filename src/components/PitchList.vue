@@ -143,7 +143,7 @@ export default {
     },
 
     pitchSelect(el) {
-      this.$emit("changeSelectedPitch", el);
+      this.$emit("changeSelectedPitch", el.target.attributes.index.value);
     },
 
     consoleOutput(el) {

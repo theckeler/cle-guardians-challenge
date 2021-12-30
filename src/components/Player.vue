@@ -95,12 +95,28 @@ export default {
         showContractInfo: true,
         showPitches: true,
       },
+      params: null,
     };
   },
 
   props: {},
 
   created() {
+    const paramsString = window.location.search.substring(1);
+    if (paramsString) {
+      let searchParams = new URLSearchParams(paramsString);
+      if (Number(searchParams.get("playerId") > 0)) {
+        this.playerID = Number(searchParams.get("playerId"));
+        document.cookie = `playerID=${this.playerID}`;
+      }
+
+      if (Number(searchParams.get("selectedPitch")) >= 0) {
+        this.selectedPitch = Number(searchParams.get("selectedPitch"));
+      }
+
+      this.params = paramsString;
+    }
+
     this.updateCookies();
   },
 
@@ -117,6 +133,7 @@ export default {
 
   mounted() {
     this.fetchData();
+    this.updateURL();
   },
 
   methods: {
@@ -124,13 +141,18 @@ export default {
       this.sortBy = reSort.target.value;
     },
 
-    checkNumChildren() {
-      //let numChildren = document.querySelector(".player-container");
-      //console.log(numChildren.children.length);
+    updateURL() {
+      let params = new URLSearchParams(location.search);
+      params.set("playerId", this.playerID);
+      if (this.selectedPitch >= 0) {
+        params.set("selectedPitch", this.selectedPitch);
+      }
+      window.history.replaceState({}, "", `${location.pathname}?${params}`);
     },
 
     updateSelectedPitch(el) {
-      this.selectedPitch = Number(el.target.attributes.index.value);
+      this.selectedPitch = Number(el);
+      this.updateURL();
 
       let selected = document.querySelectorAll(".selected");
       let pitchPlotEl = document.querySelector(
@@ -160,48 +182,59 @@ export default {
         });
       }
 
-      console.log(
-        "height",
-        document.querySelector(".pitch-list-container").offsetHeight
-      );
-      console.log("scrollToThis", scrollToThis.offsetTop);
-
       document.querySelector(".pitch-list-container").scrollTop =
         scrollToThis.offsetTop;
       scrollToThis.classList.add("selected");
     },
 
-    fetchData() {
-      let fetchURL =
+    async runFetch(url) {
+      const data = await fetch(url, {
+        method: "get",
+      }).then((r) => r.json());
+
+      return { data };
+    },
+
+    async fetchData() {
+      const playerInfo = await this.runFetch(
         "https://cle-endpoints.consumedesign.com/api/players?playerId=" +
-        this.playerID;
-      fetch(fetchURL)
-        .then((res) => res.json())
-        .then((data) => {
-          this.playerInfo = data.playerDetail;
-        });
+          this.playerID
+      );
+      if (playerInfo.data.playerDetail) {
+        this.playerInfo = playerInfo.data.playerDetail;
+        document.title = `${playerInfo.data.playerDetail.fullName} => Pitcher Assessment`;
+      }
 
-      fetchURL =
+      const playerPitches = await this.runFetch(
         "https://cle-endpoints.consumedesign.com/api/pitches?playerId=" +
-        this.playerID;
-      fetch(fetchURL)
-        .then((res) => res.json())
-        .then((data) => {
-          this.pitches = data.pitches.sort((a, b) =>
-            a[this.sortBy] > b[this.sortBy] ? 1 : -1
-          );
+          this.playerID
+      );
 
-          const pitchMenu = {};
-          this.pitches.forEach((p) => {
-            pitchMenu[p.pitchName] = p.pitchType;
-          });
-          this.pitchMenu = pitchMenu;
+      if (playerPitches.data.pitches) {
+        this.pitches = playerPitches.data.pitches.sort((a, b) =>
+          a[this.sortBy] > b[this.sortBy] ? 1 : -1
+        );
 
-          setTimeout(() => {
-            document.querySelector("body").classList.remove("active");
-            this.loading = false;
-          }, 1000);
+        const pitchMenu = {};
+        this.pitches.forEach((p) => {
+          pitchMenu[p.pitchName] = p.pitchType;
         });
+        this.pitchMenu = pitchMenu;
+
+        setTimeout(() => {
+          if (
+            this.selectedPitch >= 0 &&
+            document.querySelector(
+              `.pitch-plot-container circle[index="${this.selectedPitch}"]`
+            )
+          ) {
+            this.updateSelectedPitch(this.selectedPitch);
+          }
+
+          document.querySelector("body").classList.remove("active");
+          this.loading = false;
+        }, 1000);
+      }
     },
 
     updatePlayer(newPlayer) {
@@ -212,6 +245,10 @@ export default {
         el.classList.add("active");
         el.setAttribute("r", 0.12);
       });
+
+      this.selectedPitch = null;
+      this.updateURL();
+      //window.history.pushState("", "", `/?playerId=${this.playerID}`);
     },
 
     updatePitchMenu(pitchMenu) {
