@@ -34,6 +34,8 @@
       :playerInfo="playerInfo"
       @changePlayer="updatePlayer"
       @changeCookieOptions="updateCookieOptions"
+      @updateURL="updateURL"
+      @resetSelectedPitch="resetSelectedPitch"
     />
 
     <PlayerInfo
@@ -127,9 +129,12 @@ export default {
     this.numChildren = numChildren.children.length;
   },
 
-  mounted() {},
-
   methods: {
+    resetSelectedPitch() {
+      this.selectedPitch = null;
+      this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
+    },
+
     updateSortBy(reSort) {
       this.sortBy = reSort.target.value;
     },

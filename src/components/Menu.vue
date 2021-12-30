@@ -228,16 +228,11 @@ export default {
     playerInfo: {
       type: Object,
     },
+    updateURL: { type: Function },
   },
 
   methods: {
     changePitchOptions(e) {
-      //console.log(e);
-
-      //       document.querySelectorAll('div').forEach(function(el) {
-      //   el.style.color = "orange";
-      // })
-
       let selected = document.querySelectorAll(".selected");
       if (selected.length) {
         selected.forEach((check) => {
@@ -256,6 +251,9 @@ export default {
           el.setAttribute("r", 0);
         });
       }
+
+      this.$emit("updateURL");
+      this.$emit("resetSelectedPitch");
     },
 
     openMenu(whatMenu) {
