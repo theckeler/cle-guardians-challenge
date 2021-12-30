@@ -181,6 +181,8 @@ export default {
       document.querySelector(".pitch-list-container").scrollTop =
         scrollToThis.offsetTop;
       scrollToThis.classList.add("selected");
+
+      this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
     },
 
     async runFetch(url) {
@@ -191,6 +193,12 @@ export default {
       return { data };
     },
 
+    updatetitle(player, pitch) {
+      document.title = `${player ? player + " ›" : ""} ${
+        pitch ? "Pitch #" + this.pitches[pitch].pitchNum + " ›" : ""
+      }  Pitcher Assessment`;
+    },
+
     async fetchData() {
       const playerInfo = await this.runFetch(
         "https://cle-endpoints.consumedesign.com/api/players?playerId=" +
@@ -198,7 +206,6 @@ export default {
       );
       if (playerInfo.data.playerDetail) {
         this.playerInfo = playerInfo.data.playerDetail;
-        document.title = `${playerInfo.data.playerDetail.fullName} => Pitcher Assessment`;
       }
 
       const playerPitches = await this.runFetch(
@@ -231,6 +238,8 @@ export default {
           this.loading = false;
         }, 1000);
       }
+
+      this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
     },
 
     updatePlayer(newPlayer) {
