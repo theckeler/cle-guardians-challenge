@@ -28,7 +28,7 @@
     </div>
 
     <Menu
-      :playerID="playerID"
+      :playerId="playerId"
       :displayOptions="displayOptions"
       :pitchMenu="pitchMenu"
       :playerInfo="playerInfo"
@@ -52,15 +52,7 @@
       @changeSelectedPitch="updateSelectedPitch"
     />
 
-    <PitchList
-      v-if="pitches"
-      :displayOptions="displayOptions"
-      :selectedPitch="selectedPitch"
-      :sortBy="sortBy"
-      :pitches="pitches"
-      @changeSelectedPitch="updateSelectedPitch"
-      @changeSortBy="updateSortBy"
-    />
+    <PitchList :pitches="pitches" @changeSelectedPitch="updateSelectedPitch" />
   </div>
 </template>
 <script>
@@ -86,7 +78,7 @@ export default {
       selectedPitch: null,
       numChildren: null,
       sortBy: "gameDate",
-      playerID: 105859,
+      playerId: 105859,
       pitchMenu: {},
       displayOptions: {
         showPlayerInfo: true,
@@ -106,8 +98,8 @@ export default {
     if (paramsString) {
       let searchParams = new URLSearchParams(paramsString);
       if (Number(searchParams.get("playerId") > 0)) {
-        this.playerID = Number(searchParams.get("playerId"));
-        document.cookie = `playerID=${this.playerID}`;
+        this.playerId = Number(searchParams.get("playerId"));
+        document.cookie = `playerId=${this.playerId}`;
       }
 
       if (Number(searchParams.get("selectedPitch")) >= 0) {
@@ -118,11 +110,15 @@ export default {
     }
 
     this.updateCookies();
+
+    this.fetchData();
+    this.updateURL();
   },
 
   watch: {
-    playerID: function () {
+    playerId: function () {
       this.fetchData();
+      this.updateURL();
     },
   },
 
@@ -131,10 +127,7 @@ export default {
     this.numChildren = numChildren.children.length;
   },
 
-  mounted() {
-    this.fetchData();
-    this.updateURL();
-  },
+  mounted() {},
 
   methods: {
     updateSortBy(reSort) {
@@ -143,7 +136,10 @@ export default {
 
     updateURL() {
       let params = new URLSearchParams(location.search);
-      params.set("playerId", this.playerID);
+      if (this.playerId > 0) {
+        params.set("playerId", this.playerId);
+      }
+
       if (this.selectedPitch >= 0) {
         params.set("selectedPitch", this.selectedPitch);
       }
@@ -198,7 +194,7 @@ export default {
     async fetchData() {
       const playerInfo = await this.runFetch(
         "https://cle-endpoints.consumedesign.com/api/players?playerId=" +
-          this.playerID
+          this.playerId
       );
       if (playerInfo.data.playerDetail) {
         this.playerInfo = playerInfo.data.playerDetail;
@@ -207,7 +203,7 @@ export default {
 
       const playerPitches = await this.runFetch(
         "https://cle-endpoints.consumedesign.com/api/pitches?playerId=" +
-          this.playerID
+          this.playerId
       );
 
       if (playerPitches.data.pitches) {
@@ -239,8 +235,8 @@ export default {
 
     updatePlayer(newPlayer) {
       this.loading = true;
-      this.playerID = Number(newPlayer);
-      document.cookie = `playerID=${Number(newPlayer)}`;
+      this.playerId = Number(newPlayer);
+      document.cookie = `playerId=${Number(newPlayer)}`;
       document.querySelectorAll("circle").forEach((el) => {
         el.classList.add("active");
         el.setAttribute("r", 0.12);
@@ -248,7 +244,6 @@ export default {
 
       this.selectedPitch = null;
       this.updateURL();
-      //window.history.pushState("", "", `/?playerId=${this.playerID}`);
     },
 
     updatePitchMenu(pitchMenu) {
