@@ -89,32 +89,25 @@ export default {
         showContractInfo: true,
         showPitches: true,
       },
-      params: null,
+      historyURL: {},
     };
   },
 
   props: {},
 
   created() {
-    const paramsString = window.location.search.substring(1);
-    if (paramsString) {
-      let searchParams = new URLSearchParams(paramsString);
-      if (Number(searchParams.get("playerId") > 0)) {
-        this.playerId = Number(searchParams.get("playerId"));
-        document.cookie = `playerId=${this.playerId}`;
-      }
-
-      if (Number(searchParams.get("selectedPitch")) >= 0) {
-        this.selectedPitch = Number(searchParams.get("selectedPitch"));
-      }
-
-      this.params = paramsString;
-    }
-
+    this.breakDownURL(window.location.pathname.split("/").splice(1));
     this.updateCookies();
-
     this.fetchData();
     this.updateURL();
+
+    // window.onpopstate = (event) => {
+    //   //console.log("onpopstate:", event.target.location.pathname);
+    //   this.breakDownURL(event.target.location.pathname.split("/").splice(1));
+    //   ////console.log("selectedPitch: ", this.selectedPitch);
+    //   this.updateSelectedPitch(this.selectedPitch);
+    //   //this.updateURL();
+    // };
   },
 
   watch: {
@@ -136,7 +129,17 @@ export default {
   },
 
   methods: {
+    breakDownURL(pathArray) {
+      //console.log("breakDownURL");
+      pathArray.forEach((p, i) => {
+        if (p === "playerId" || p === "selectedPitch") {
+          this[pathArray[i]] = Number(pathArray[i + 1]);
+        }
+      });
+    },
+
     resetSelectedPitch() {
+      //console.log("resetSelectedPitch");
       this.selectedPitch = null;
       this.resetAllSelected();
       this.updateURL();
@@ -145,6 +148,7 @@ export default {
     },
 
     resetAllSelected() {
+      //console.log("resetAllSelected");
       let selected = document.querySelectorAll(".selected");
       if (selected.length) {
         selected.forEach((check) => {
@@ -160,24 +164,22 @@ export default {
       }
     },
 
-    updateSortBy(reSort) {
-      this.sortBy = reSort.target.value;
-    },
+    // updateSortBy(reSort) {
+    //   this.sortBy = reSort.target.value;
+    // },
 
     updateURL() {
-      let params = new URLSearchParams(location.search);
-      if (this.playerId > 0) {
-        params.set("playerId", this.playerId);
-      }
-
-      if (this.selectedPitch >= 0) {
-        params.set("selectedPitch", this.selectedPitch);
-      }
-      window.history.replaceState({}, "", `${location.pathname}?${params}`);
+      //console.log("updateURL");
+      history.pushState(
+        "",
+        "",
+        `/playerId/${this.playerId}/selectedPitch/${this.selectedPitch}`
+      );
     },
 
-    updateSelectedPitch(el) {
-      this.selectedPitch = Number(el);
+    updateSelectedPitch(num) {
+      //console.log("updateSelectedPitch");
+      this.selectedPitch = Number(num);
       this.updateURL();
 
       let pitchPlotEl = document.querySelector(
@@ -207,6 +209,7 @@ export default {
     },
 
     async runFetch(url) {
+      //console.log("runFetch");
       const data = await fetch(url, {
         method: "get",
       }).then((r) => r.json());
@@ -215,12 +218,14 @@ export default {
     },
 
     updatetitle(player, pitch) {
+      //console.log("updatetitle");
       document.title = `${player ? player + " ›" : ""} ${
-        pitch ? "Pitch #" + this.pitches[pitch].pitchNum + " ›" : ""
+        this.pitch ? "Pitch #" + this.pitches[pitch].pitchNum + " ›" : ""
       }  Pitcher Assessment`;
     },
 
     async fetchData() {
+      //console.log("fetchData");
       const playerInfo = await this.runFetch(
         "https://cle-endpoints.consumedesign.com/api/players?playerId=" +
           this.playerId
@@ -264,6 +269,7 @@ export default {
     },
 
     updatePlayer(newPlayer) {
+      //console.log("updatePlayer");
       this.loading = true;
       this.playerId = Number(newPlayer);
       document.cookie = `playerId=${Number(newPlayer)}`;
@@ -277,14 +283,17 @@ export default {
     },
 
     updatePitchMenu(pitchMenu) {
+      //console.log("updatePitchMenu");
       this.pitchMenu = pitchMenu;
     },
 
     updateCookieOptions() {
+      //console.log("updateCookieOptions");
       this.updateCookies();
     },
 
     updateCookies() {
+      //console.log("updateCookies");
       if (document.cookie) {
         let cookies;
 
