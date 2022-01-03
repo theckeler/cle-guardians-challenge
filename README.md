@@ -1,4 +1,4 @@
-# Project for CLE Guardians
+# CLE Guardians vue Testing
 
 ## Project setup
 
