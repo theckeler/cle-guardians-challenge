@@ -155,3 +155,22 @@ h2 {
   margin: 0 auto;
   position: relative;
 }
+
+.logo.error {
+  max-width: em(400px);
+  text-align: center;
+  background: red;
+  box-shadow: 0 0 20px #000;
+
+  svg {
+    max-width: em(60px);
+  }
+
+  p {
+    margin-top: em(14px);
+    font-size: rem(22px);
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}

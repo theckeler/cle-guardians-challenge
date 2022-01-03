@@ -52,9 +52,14 @@
       :selectedPitch="selectedPitch"
       :pitches="pitches"
       @changeSelectedPitch="updateSelectedPitch"
+      @updateURL="updateURL"
     />
 
-    <PitchList :pitches="pitches" @changeSelectedPitch="updateSelectedPitch" />
+    <PitchList
+      :pitches="pitches"
+      @changeSelectedPitch="updateSelectedPitch"
+      @updateURL="updateURL"
+    />
   </div>
 </template>
 <script>
@@ -89,7 +94,7 @@ export default {
         showContractInfo: true,
         showPitches: true,
       },
-      historyURL: {},
+      historyURL: [],
     };
   },
 
@@ -101,13 +106,10 @@ export default {
     this.fetchData();
     this.updateURL();
 
-    // window.onpopstate = (event) => {
-    //   //console.log("onpopstate:", event.target.location.pathname);
-    //   this.breakDownURL(event.target.location.pathname.split("/").splice(1));
-    //   ////console.log("selectedPitch: ", this.selectedPitch);
-    //   this.updateSelectedPitch(this.selectedPitch);
-    //   //this.updateURL();
-    // };
+    window.onpopstate = (event) => {
+      this.breakDownURL(event.target.location.pathname.split("/").splice(1));
+      this.updateSelectedPitch(this.selectedPitch);
+    };
   },
 
   watch: {
@@ -178,26 +180,24 @@ export default {
     },
 
     updateSelectedPitch(num) {
-      //console.log("updateSelectedPitch");
+      //console.log("updateSelectedPitch", num);
       this.selectedPitch = Number(num);
-      this.updateURL();
-
-      let pitchPlotEl = document.querySelector(
-        `.pitch-plot-container circle[index="${this.selectedPitch}"]`
-      );
-      let parentEl = document.querySelector(".pitch-plot-container svg");
-
-      this.resetAllSelected();
-
-      const scrollToThis = document.querySelector(
-        `#pitch-list-${this.selectedPitch}`
-      );
-      pitchPlotEl.classList.add("selected");
-      parentEl.removeChild(pitchPlotEl);
-      parentEl.appendChild(pitchPlotEl);
-      this.scrollTo(scrollToThis);
-      scrollToThis.classList.add("selected");
-      this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
+      if (this.selectedPitch >= 0) {
+        let pitchPlotEl = document.querySelector(
+          `.pitch-plot-container circle[index="${this.selectedPitch}"]`
+        );
+        let parentEl = document.querySelector(".pitch-plot-container svg");
+        this.resetAllSelected();
+        const scrollToThis = document.querySelector(
+          `#pitch-list-${this.selectedPitch}`
+        );
+        pitchPlotEl.classList.add("selected");
+        parentEl.removeChild(pitchPlotEl);
+        parentEl.appendChild(pitchPlotEl);
+        this.scrollTo(scrollToThis);
+        scrollToThis.classList.add("selected");
+        this.updatetitle(this.playerInfo["fullName"], this.selectedPitch);
+      }
     },
 
     scrollTo(scrollToThis) {
@@ -210,9 +210,15 @@ export default {
 
     async runFetch(url) {
       //console.log("runFetch");
-      const data = await fetch(url, {
-        method: "get",
-      }).then((r) => r.json());
+      const data = await fetch(url)
+        .then((r) => r.json())
+        .catch((error) => {
+          console.error("Oops, something bad happened:", error);
+          document.querySelector(".logo").classList.add("error");
+          document.querySelector(
+            ".logo"
+          ).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 155 155"><path d="M77.5 0C34.7 0 0 34.7 0 77.5S34.7 155 77.5 155 155 120.3 155 77.5 120.3 0 77.5 0zm7.7 116.2H69.8v-15.5h15.5v15.5zm0-31H69.8V38.8h15.5v46.4z"/></svg><p>Oops, something bad happened.</p>`;
+        });
 
       return { data };
     },
