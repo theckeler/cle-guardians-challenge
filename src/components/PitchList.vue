@@ -139,8 +139,10 @@ export default {
     },
 
     pitchSelect(el) {
-      this.$emit("changeSelectedPitch", el.target.attributes.index.value);
-      this.$emit("updateURL");
+      if (!el.target.parentNode.classList.contains("selected")) {
+        this.$emit("changeSelectedPitch", el.target.attributes.index.value);
+        this.$emit("updateURL");
+      }
     },
   },
 };

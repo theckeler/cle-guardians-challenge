@@ -133,14 +133,13 @@ export default {
     },
 
     pitchSelect(el) {
-      if (el.target.classList.contains("active")) {
+      if (
+        el.target.classList.contains("active") &&
+        !el.target.classList.contains("selected")
+      ) {
         this.$emit("changeSelectedPitch", el.target.attributes.index.value);
         this.$emit("updateURL");
       }
-    },
-
-    consoleOutput(el) {
-      console.log(el);
     },
   },
 };
