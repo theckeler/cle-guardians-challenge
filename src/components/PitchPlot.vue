@@ -17,7 +17,7 @@
       "
       preserveAspectRatio="xMidYMid meet"
       ref="svg"
-      id="pitch-plot-svg"
+      id="pitch-plot-strike-zone"
     >
       <rect
         :x="strikezoneCoords.x"
@@ -25,9 +25,25 @@
         :width="strikezoneCoords.width"
         :height="strikezoneCoords.height"
         stroke="#000000"
-        :stroke-width="0.02"
+        :stroke-width="0.03"
         fill-opacity="0"
       ></rect>
+    </svg>
+    <svg
+      style="display: block"
+      :viewBox="
+        coordSystem.minX +
+        ' ' +
+        coordSystem.minY +
+        ' ' +
+        coordSystem.width +
+        ' ' +
+        coordSystem.height
+      "
+      preserveAspectRatio="xMidYMid meet"
+      ref="svg"
+      id="pitch-plot-svg"
+    >
       <circle
         v-for="(p, i) in pitches"
         :key="'pitch-' + i"

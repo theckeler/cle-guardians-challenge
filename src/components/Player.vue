@@ -186,7 +186,7 @@ export default {
         let pitchPlotEl = document.querySelector(
           `.pitch-plot-container circle[index="${this.selectedPitch}"]`
         );
-        let parentEl = document.querySelector(".pitch-plot-container svg");
+        let parentEl = document.querySelector("#pitch-plot-svg");
         this.resetAllSelected();
         const scrollToThis = document.querySelector(
           `#pitch-list-${this.selectedPitch}`
